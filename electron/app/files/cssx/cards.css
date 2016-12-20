@@ -1,0 +1,99 @@
+
+#player_top{
+    margin: 25px;
+}
+
+.card {
+    height: 109px;
+    width: 79px;
+    background-image: url(../images/cards_front_small.jpg);
+    background-position: -622px 0px;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: 0;
+}
+
+.card .more {
+    position: absolute;
+    top: 30px;
+    left: 15px;
+    height: 35px;
+    width: 50px;
+    padding-top: 15px;
+    border-radius: 24px;
+    background: rgba(0,0,0,0.8);
+    color:#fff;
+    text-align: center;
+}
+
+.card.hide {
+    width: 25%;
+}
+
+.card:hover {
+    z-index: 100;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /*top: -30px;*/
+}
+
+.card.hearth {
+    -ms-background-position-x:0px;
+    background-position-x:0px;
+}
+
+/* Herz */
+.card.symbol-1{
+    background-position-y: 0px;
+}
+
+/* Pik */
+.card.symbol-2{
+    background-position-y: 79px;
+}
+
+/* Kreuz */
+.card.symbol-3{
+
+}
+
+/* Karo */
+.card.symbol-4{
+
+}
+
+.card.value-13 {
+
+}
+
+.player {
+    width: 50px;
+    padding-top: 10px;
+    float: right;
+}
+
+.player .name {
+    font-size: 12px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+
+.player .avatar {
+    background-image: url(../images/avatar.png);
+    background-size: cover;
+    height: 50px;
+    width: 50px;
+    border-radius: 24px;
+}
+
+.player_cards {
+    position: relative;
+    right: 75px;
+}
+
+.card-more {
+    position: relative;
+    right: 0;
+    z-index: 200;
+}
+
