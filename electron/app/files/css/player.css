@@ -1,0 +1,24 @@
+#player_top {
+  margin: 25px;
+}
+.player {
+  width: 50px;
+  padding-top: 10px;
+  float: right;
+}
+.player .name {
+  font-size: 12px;
+  padding-top: 10px;
+  text-align: center;
+}
+.player .avatar {
+  background-image: url("../images/avatar.png");
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+  border-radius: 24px;
+}
+.player_cards {
+  position: relative;
+  right: 75px;
+}
