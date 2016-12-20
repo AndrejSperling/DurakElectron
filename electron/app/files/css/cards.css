@@ -1,79 +1,75 @@
-
-#player_top{
-    margin: 25px;
-}
-
 .card {
-    height: 109px;
-    width: 79px;
-    background-image: url(../images/cards_front_small.jpg);
-    background-position: -622px 0px;
-    background-repeat: no-repeat;
-    position: absolute;
-    z-index: 0;
+  height: 109px;
+  width: 79px;
+  background-image: url("../images/cards_front_medium.jpg");
+  background-position: -622px 0px;
+  background-repeat: no-repeat;
+  position: absolute;
+  z-index: 0;
 }
-
+@media (min-width: 500px) {
+  .card {
+    background-image: url("../images/cards_front_small.jpg");
+  }
+}
 .card .more {
-    position: absolute;
-    top: 30px;
-    left: 15px;
-    height: 35px;
-    width: 50px;
-    padding-top: 15px;
-    border-radius: 24px;
-    background: rgba(0,0,0,0.8);
-    color:#fff;
-    text-align: center;
+  position: absolute;
+  top: 30px;
+  left: 15px;
+  height: 35px;
+  width: 50px;
+  padding-top: 15px;
+  border-radius: 24px;
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  text-align: center;
 }
-
-.card.hide {
-    width: 25%;
-}
-
 .card:hover {
-    z-index: 100;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    /*top: -30px;*/
+  z-index: 100;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
-
-.card.hearth {
-    -ms-background-position-x:0px;
-    background-position-x:0px;
+.card.hide {
+  width: 25%;
 }
-
+/*
+1. Herz
+2. Karo
+3. Pik
+4. Kreuz
+ */
+.card.symbol-1 {
+  background-position-y: 0px;
+}
+.card.symbol-2 {
+  background-position-y: -109px;
+}
+.card.symbol-3 {
+  background-position-y: -218px;
+}
+.card.symbol-4 {
+  background-position-y: -327px;
+}
+.card.value-6 {
+  background-position-x: 0px;
+}
+.card.value-7 {
+  background-position-x: -79px;
+}
+.card.value-8 {
+  background-position-x: -158px;
+}
+.card.value-9 {
+  background-position-x: -237px;
+}
+.card.value-10 {
+  background-position-x: -316px;
+}
+.card.value-11 {
+  background-position-x: -395px;
+}
+.card.value-12 {
+  background-position-x: -474px;
+}
 .card.value-13 {
-
+  background-position-x: -553px;
 }
-
-.player {
-    width: 50px;
-    padding-top: 10px;
-    float: right;
-}
-
-.player .name {
-    font-size: 12px;
-    padding-top: 10px;
-    text-align: center;
-}
-
-
-.player .avatar {
-    background-image: url(../images/avatar.png);
-    background-size: cover;
-    height: 50px;
-    width: 50px;
-    border-radius: 24px;
-}
-
-.player_cards {
-    position: relative;
-    right: 75px;
-}
-
-.card-more {
-    position: relative;
-    right: 0;
-    z-index: 200;
-}
-
