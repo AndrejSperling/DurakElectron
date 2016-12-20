@@ -1,46 +1,10 @@
+// SPIEL
+"use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-/**
- * Created by Study on 18.12.2016.
- */
-var electron = require('electron');
-var app = electron.app;
-var BrowserWindow = electron.BrowserWindow;
-var path = require('path');
-var url = require('url');
-var mainWindow;
-function createWindow() {
-    mainWindow = new BrowserWindow({ width: 250, height: 250 });
-    mainWindow.loadURL(url.format({
-        protocol: 'file:',
-        pathname: path.join(__dirname, 'app/index.html'),
-        slashes: true
-    }));
-    //mainWindow.webContents.openDevTools()
-    mainWindow.on('closed', function () {
-        mainWindow = null;
-    });
-    main();
-}
-app.on('ready', createWindow);
-app.on('window-all-closed', function () {
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
-});
-app.on('activate', function () {
-    if (mainWindow === null) {
-        createWindow();
-    }
-});
-function main() {
-    var spiel = new Durak();
-    console.log(spiel.toString());
-}
-// SPIEL
 var Card = (function () {
     function Card(fv, av, s, v) {
         if (fv >= Card.MIN && fv <= Card.MAX) {
@@ -397,4 +361,13 @@ var Durak = (function () {
     };
     return Durak;
 }());
+module.exports = {
+    Durak: Durak,
+    Card: Card,
+    RenderedCard: RenderedCard,
+    CardDeck: CardDeck,
+    RandomCardDeck: RandomCardDeck,
+    DurakDeck: DurakDeck,
+    Splash: Splash
+};
 // GUI 

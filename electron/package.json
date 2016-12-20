@@ -2,7 +2,7 @@
   "name": "DurakElectron",
   "version": "0.0.1",
   "description": "Durak ist ein russisches Kartenspiel welches mit mehreren Personen gespielt wird. Ziel der Applikation ist es, als Unterhaltungsmedium zu fungieren und den Anwender somit zu begeistern. Es soll das Spielen gegen KI gesteuerte Gegner, sowie auch realen menschlichen Gegnern per Internetverbindung ermöglichen.",
-  "main": "./durak.js",
+  "main": "./main.js",
   "scripts": {
     "start": "electron .",
     "package": "asar pack Durak.app/Contents/Resources/app Durak.app/Contents/Resources/app.asar",
@@ -14,7 +14,7 @@
     "Durak"
   ],
   "author": "Nikolai Kloss, Andrej Sperling",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "devDependencies": {
     "electron-packager": "^8.2.0",
     "electron-prebuilt": "^1.4.5"
