@@ -9,6 +9,7 @@ var Controller = (function () {
     function Controller(document) {
         this.DATA_SYMBOL = "data-card-symbol";
         this.DATA_VALUE = "data-card-value";
+        this.PLAYABLE_CARDS = "playable";
         this.doc = document;
     }
     return Controller;
@@ -20,10 +21,21 @@ var AIController = (function (_super) {
         _super.call(this, document);
         this.game = new durak_1.Durak("WasApBi");
     }
+    AIController.prototype.init = function (doc) {
+        var self = this;
+        // init clicklistener for cards
+        var playableCards = doc.getElementsByClassName(this.PLAYABLE_CARDS);
+        for (var i = 0; i < playableCards.length; i++) {
+            playableCards[i].addEventListener("click", function () {
+                self.playCard(this);
+            });
+        }
+    };
     AIController.prototype.playCard = function (clickedElement) {
-        var symbol = clickedElement.getAttribute(this.DATA_SYMBOL);
+        console.log(clickedElement);
+        var symbole = clickedElement.getAttribute(this.DATA_SYMBOL);
         var value = clickedElement.getAttribute(this.DATA_VALUE);
-        alert("Clicked: symbole-> " + symbol + " value->" + value);
+        alert("Clicked: symbole-> " + symbole + " value->" + value);
         clickedElement.remove();
     };
     return AIController;
