@@ -1,7 +1,6 @@
-
 // SPIEL
 
-class Card {
+export class Card {
     public static JACK: number = 11;
     public static QUEEN: number = 12;
     public static KING: number = 13;
@@ -14,38 +13,38 @@ class Card {
     protected _suit: string;
     protected _visible: boolean;
 
-    public constructor(fv:number, av:number,s:string,v:boolean) {
-        if(fv >= Card.MIN && fv <= Card.MAX){
+    public constructor(fv: number, av: number, s: string, v: boolean) {
+        if (fv >= Card.MIN && fv <= Card.MAX) {
             this._faceValue = fv;
-        }else{
+        } else {
             this._faceValue = 2;
         }
         this._actualValue = av;
-        if(s === "C" || s === "D" || s === "H" || s === "S"){
+        if (s === "C" || s === "D" || s === "H" || s === "S") {
             this._suit = s;
-        }else{
+        } else {
             this._suit = "C";
         }
         this._visible = v;
     }
 
-    public toString(){
-        if(this._visible !== true){
+    public toString() {
+        if (this._visible !== true) {
             return "??";
         }
         var face: string;
-        if(this._faceValue >= 2 && this._faceValue <= 10){
+        if (this._faceValue >= 2 && this._faceValue <= 10) {
             face = "" + this._faceValue;
-        }else{
-            if(this._faceValue === Card.JACK){
+        } else {
+            if (this._faceValue === Card.JACK) {
                 face = "J"
-            }else if(this._faceValue === Card.QUEEN){
+            } else if (this._faceValue === Card.QUEEN) {
                 face = "Q"
-            }else if(this._faceValue === Card.KING){
+            } else if (this._faceValue === Card.KING) {
                 face = "K"
-            }else if(this._faceValue === Card.ACE){
+            } else if (this._faceValue === Card.ACE) {
                 face = "A"
-            }else{
+            } else {
                 face = "2"
             }
         }
@@ -53,8 +52,8 @@ class Card {
         return face;
     }
 
-    public isPictureCad(){
-        if(this._faceValue >= Card.JACK && this._faceValue <= Card.KING){
+    public isPictureCad() {
+        if (this._faceValue >= Card.JACK && this._faceValue <= Card.KING) {
             return true;
         }
         return false;
@@ -94,7 +93,7 @@ class Card {
     }
 }
 
-class RenderedCard extends Card {
+export class RenderedCard extends Card {
 
 // KONSTRUKTOR WIRD AUFGRUND VON ÜBERLADUNG KOMISCH VERWENDET !!
 
@@ -105,14 +104,14 @@ class RenderedCard extends Card {
 
 
     constructor(fv: number, s: string, v: boolean, hs: boolean) {
-        super(fv,fv,s,v);
+        super(fv, fv, s, v);
         this._isHeighSuit = hs;
     }
 
-    public paint(g: string){
-        if(!this.visible){
+    public paint(g: string) {
+        if (!this.visible) {
             // male rückseite der Karte
-        }else{
+        } else {
             // male vorderseite der Karte
             //String s = "picture_data/" + this.toString() + ".gif";
             //image = Toolkit.getDefaultToolkit().getImage(s);
@@ -120,10 +119,9 @@ class RenderedCard extends Card {
         }
     }
 
-    public update(g: string){
+    public update(g: string) {
         this.paint(g);
     }
-
 
 
     get image(): string {
@@ -159,44 +157,44 @@ class RenderedCard extends Card {
     }
 }
 
-class CardDeck{
+export class CardDeck {
     protected _top: number;
     protected _cards: RenderedCard[];
 
-    constructor(){
+    constructor() {
         this._top = 0;
         var numValues: number = Card.MAX - Card.MIN + 1;
         this._cards = Array((Card.suits.length * numValues));
         var cIndex: number = 0;
 
         //Karten erstellen und ins Deck einfügen
-        for(var s = 0; s < Card.suits.length; s++){
-            for(var v = Card.MIN; v <= Card.MAX; v++){
+        for (var s = 0; s < Card.suits.length; s++) {
+            for (var v = Card.MIN; v <= Card.MAX; v++) {
                 cIndex = s * numValues + v - Card.MIN;
-                this._cards[cIndex] = new RenderedCard(v,Card.suits[s],true,false);
+                this._cards[cIndex] = new RenderedCard(v, Card.suits[s], true, false);
             }
         }
     }
 
-    public list(){
-        for(var x = 0; x < this._cards.length; x++){
+    public list() {
+        for (var x = 0; x < this._cards.length; x++) {
             console.log(this._cards[x].toString());
         }
     }
 
-    public deal(){
+    public deal() {
         var dealt = this._cards[this._top++];
-        if(this._top > this._cards.length){
+        if (this._top > this._cards.length) {
             return null;
         }
         return dealt;
     }
 
-    public reset(){
+    public reset() {
         this._top = 0;
     }
 
-    public getNumCardsLeft(){
+    public getNumCardsLeft() {
         return this._cards.length - this._top;
     }
 
@@ -218,50 +216,50 @@ class CardDeck{
     }
 }
 
-class RandomCardDeck extends CardDeck{
-    constructor(){
+export class RandomCardDeck extends CardDeck {
+    constructor() {
         super();
         this.shuffle();
     }
 
-    public shuffle(){
+    public shuffle() {
         var shuffled = Array(this.cards.length);
         var cIndex = null;
         var placed = null;
-        for(var c = 0; c < this.cards.length;c++){
-            do{
+        for (var c = 0; c < this.cards.length; c++) {
+            do {
                 placed = false;
                 cIndex = Math.floor((Math.random() * this.cards.length) + 0);
-                if(shuffled[cIndex] === undefined){
+                if (shuffled[cIndex] === undefined) {
                     shuffled[cIndex] = this.cards[c];
                     placed = true;
                 }
-            }while(placed === false);
+            } while (placed === false);
         }
 
         this.cards = shuffled.slice(0);
         this.top = 0;
     }
 
-    public reset(){
+    public reset() {
         super.reset();
         this.shuffle();
     }
 
 }
 
-class DurakDeck extends RandomCardDeck{
-    constructor(){
+export class DurakDeck extends RandomCardDeck {
+    constructor() {
         super();
         this.selectCards();
     }
 
-    public selectCards(){
+    public selectCards() {
         //Filtert alle Karten mit Wert < 6 herraus
         var i: number = 0;
         var selected: RenderedCard[] = Array(36);
-        for(var c = 0; c < this.cards.length; c++){
-            if(this.cards[c].actualValue > 5){
+        for (var c = 0; c < this.cards.length; c++) {
+            if (this.cards[c].actualValue > 5) {
                 selected[i++] = this.cards[c];
             }
         }
@@ -270,11 +268,11 @@ class DurakDeck extends RandomCardDeck{
 
 }
 
-class Splash{
+export class Splash {
     // KLasse Vermutlich zum zeichnen
 }
 
-class Durak{
+export class Durak {
     private deck: DurakDeck;
     private computerHand: Card[];
     private playerHand: Card[];
@@ -291,7 +289,7 @@ class Durak{
     private highCard: RenderedCard;
     public testV: string;
 
-    constructor(testV: string){
+    constructor(testV: string) {
         this.computerHand = Array();
         this.playerHand = Array();
         this.table = Array();
@@ -300,32 +298,32 @@ class Durak{
         this.testV = testV;
     }
 
-    protected dealCards(){
+    protected dealCards() {
         //Karten austeilen
         this.getHighCard();
-        for(var c = 0; c < 6; c++){
+        for (var c = 0; c < 6; c++) {
             this.playerHand.push(this.deck.deal());
             this.computerHand.push(this.deck.deal());
         }
         // markiere Karten einzeln als Trumpf
         this.highSuit = this.highCard.suit;
-        for(var i = 0; i < this.deck.cards.length; i++){
+        for (var i = 0; i < this.deck.cards.length; i++) {
             var card: RenderedCard = this.deck.cards[i] as RenderedCard;
-            if(card.suit === this.highSuit){
+            if (card.suit === this.highSuit) {
                 this.deck.cards[i].isHeighSuit = true;
             }
         }
     }
 
-    protected getHighCard(){
+    protected getHighCard() {
         this.highCard = this.deck.cards[this.deck.cards.length - 1] as RenderedCard;
     }
 
-    protected initFrame(){
+    protected initFrame() {
         // FENSTER ZEICHNEN USW
     }
 
-    protected checkWinningCoditions(){
+    protected checkWinningCoditions() {
         if (this.playerHand.length === 0 && this.deck.getNumCardsLeft() === 0) {
             return true;
         }
@@ -335,7 +333,7 @@ class Durak{
         return false;
     }
 
-    public playerPicksUpCards(){
+    public playerPicksUpCards() {
         //Schlucken
         this.playerHand = this.playerHand.concat(this.table);
         this.table = Array();
@@ -343,10 +341,10 @@ class Durak{
         this.playersTurn = false;
     }
 
-    protected refillCards(playerPicksUpFirst: boolean){
+    protected refillCards(playerPicksUpFirst: boolean) {
         //Karten den spielern nachziehen lassen um wiedr 6 karten zu haben
         this.deck.list();
-        if(playerPicksUpFirst){
+        if (playerPicksUpFirst) {
             while (this.playerHand.length < 6 && this.deck.getNumCardsLeft() > 0) {
                 this.playerHand.push(this.deck.deal());
             }
@@ -354,7 +352,7 @@ class Durak{
             while (this.computerHand.length < 6 && this.deck.getNumCardsLeft() > 0) {
                 this.computerHand.push(this.deck.deal());
             }
-        }else{
+        } else {
             while (this.computerHand.length < 6 && this.deck.getNumCardsLeft() > 0) {
                 this.computerHand.push(this.deck.deal());
             }
@@ -365,22 +363,22 @@ class Durak{
         }
     }
 
-    public toString(){
+    public toString() {
         var result: string = "";
 
         result += "Trumpf: " + this.highCard.toString() + "\n";
         result += "KI Hand (" + this.computerHand.length + "): \n";
-        for(var t=0;t<this.computerHand.length;t++){
+        for (var t = 0; t < this.computerHand.length; t++) {
             result += this.computerHand[t].toString() + "\n";
         }
 
         result += "Spieler Hand (" + this.playerHand.length + "): \n";
-        for(var t=0;t<this.playerHand.length;t++) {
+        for (var t = 0; t < this.playerHand.length; t++) {
             result += this.playerHand[t].toString() + "\n";
         }
 
         result += "Tisch (" + this.table.length + "): \n";
-        for(var t=0;t<this.table.length;t++) {
+        for (var t = 0; t < this.table.length; t++) {
             result += this.table[t].toString() + "\n";
         }
 
@@ -390,15 +388,5 @@ class Durak{
         return result;
     }
 }
-
-export = {
-    Durak,
-    Card,
-    RenderedCard,
-    CardDeck,
-    RandomCardDeck,
-    DurakDeck,
-    Splash
-};
 
 // GUI

@@ -105,6 +105,7 @@ var Card = (function () {
     Card.suits = ["C", "D", "H", "S"];
     return Card;
 }());
+exports.Card = Card;
 var RenderedCard = (function (_super) {
     __extends(RenderedCard, _super);
     function RenderedCard(fv, s, v, hs) {
@@ -162,6 +163,7 @@ var RenderedCard = (function (_super) {
     });
     return RenderedCard;
 }(Card));
+exports.RenderedCard = RenderedCard;
 var CardDeck = (function () {
     function CardDeck() {
         this._top = 0;
@@ -216,6 +218,7 @@ var CardDeck = (function () {
     });
     return CardDeck;
 }());
+exports.CardDeck = CardDeck;
 var RandomCardDeck = (function (_super) {
     __extends(RandomCardDeck, _super);
     function RandomCardDeck() {
@@ -245,6 +248,7 @@ var RandomCardDeck = (function (_super) {
     };
     return RandomCardDeck;
 }(CardDeck));
+exports.RandomCardDeck = RandomCardDeck;
 var DurakDeck = (function (_super) {
     __extends(DurakDeck, _super);
     function DurakDeck() {
@@ -264,11 +268,13 @@ var DurakDeck = (function (_super) {
     };
     return DurakDeck;
 }(RandomCardDeck));
+exports.DurakDeck = DurakDeck;
 var Splash = (function () {
     function Splash() {
     }
     return Splash;
 }());
+exports.Splash = Splash;
 var Durak = (function () {
     function Durak(testV) {
         this.playersTurn = true;
@@ -361,13 +367,5 @@ var Durak = (function () {
     };
     return Durak;
 }());
-module.exports = {
-    Durak: Durak,
-    Card: Card,
-    RenderedCard: RenderedCard,
-    CardDeck: CardDeck,
-    RandomCardDeck: RandomCardDeck,
-    DurakDeck: DurakDeck,
-    Splash: Splash
-};
+exports.Durak = Durak;
 // GUI 

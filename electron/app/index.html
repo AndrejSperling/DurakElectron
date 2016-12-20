@@ -20,52 +20,8 @@
     </style>
 
     <script>
-        var DurakLogik = require("../app/durak/durak");
-
-        // SO
-        //var game = new DurakLogik.Durak("WasApBi");
-        //oder classen auf eine varible verlagern
-        // das ist schöner sonst muss man immer DurakLogin. davor schreiben
-        var Durak = DurakLogik.Durak;
-        var game = new Durak("WasApBi");
-        //
-        //var Card = DurakLogik.Card;
-        var RenderedCard = DurakLogik.RenderedCard;
-        // etc ....
-
-        // Am besten Klassen großschreiben, variablen klein
-
-        console.log(game.toString());
-
-        // ***** !!!11elf!!11!
-        // Nehme kurz eine einfachere Kartenlogik
-        // ****** !!!11elf!!11!
-        function Card(symbol, value){
-            this.symbol = symbol;
-            this.value = value;
-        }
-
-        function playCard(div, card){
-            defendMatch(div, new Card(1,10), card);
-        }
-
-        function createDiv(){
-
-        }
-
-        function removeDiv(div){
-
-        }
-
-        function defendMatch(div, matchcard, defendcard){
-            alert(
-                "Matchcard"  + matchcard.symbol + "\nValue"  + matchcard.value + "\n" +
-                "Defendcard" + defendcard.symbol  + "\nValue"  + defendcard.value
-            );
-
-            game.checkWinningCoditions();
-            div.remove();
-        }
+        var ControllerModule = require("../app/durak/controller");
+        var Controller = new ControllerModule.AIController(document);
 
     </script>
 
@@ -86,60 +42,8 @@
 
 
                             <!-- Top Row -->
-
                             <div class="row">
-                                <div class="col-md-3">
-
-                                    <!-- Player Top Left -->
-                                    <!--<div class="player_horizontal">
-
-                                        <div class="player">
-                                            <div class="avatar"></div>
-                                            <div class="name">Vitali123</div>
-                                        </div>
-
-                                        <div class="player_cards">
-
-                                            <div class="card" style="right:0"></div>
-                                            <div class="card" style="right:5%"></div>
-                                            <div class="card" style="right:10%"></div>
-                                            <div class="card" style="right:15%"></div>
-                                            <div class="card" style="right:20%">
-                                                <div class="more">+52</div>
-                                            </div>
-
-                                        </div>
-
-
-                                    </div>
--->
-                                </div>
-                                <div class="col-md-2">
-
-                                    <!-- Player Top Middle -->
-                                    <!--<div class="player_horizontal">
-
-                                        <div class="player">
-                                            <div class="avatar"></div>
-                                            <div class="name">Vitali123</div>
-                                        </div>
-
-                                        <div class="player_cards">
-
-                                            <div class="card" style="right:0"></div>
-                                            <div class="card" style="right:5%"></div>
-                                            <div class="card" style="right:10%"></div>
-                                            <div class="card" style="right:15%"></div>
-                                            <div class="card" style="right:20%">
-                                                <div class="more">+52</div>
-                                            </div>
-
-                                        </div>
-
-
-                                    </div>
--->
-                                </div>
+                                <div class="col-md-5"></div>
                                 <div class="col-md-3">
 
                                     <!-- Player Top Right -->
@@ -166,57 +70,6 @@
                                     </div>
 
                                 </div>
-                                <!--<div class="col-md-2">
-
-
-                                    <div class="player_horizontal">
-
-                                        <div class="player">
-                                            <div class="avatar"></div>
-                                            <div class="name">Vitali123</div>
-                                        </div>
-
-                                        <div class="player_cards">
-
-                                            <div class="card" style="right:0"></div>
-                                            <div class="card" style="right:5%"></div>
-                                            <div class="card" style="right:10%"></div>
-                                            <div class="card" style="right:15%"></div>
-                                            <div class="card" style="right:20%">
-                                                <div class="more">+52</div>
-                                            </div>
-
-                                        </div>
-
-
-                                    </div>
-
-                                </div>
-                                <div class="col-md-3">
-
-                                    <div class="player_horizontal">
-
-                                        <div class="player">
-                                            <div class="avatar"></div>
-                                            <div class="name">Vitali123</div>
-                                        </div>
-
-                                        <div class="player_cards">
-
-                                            <div class="card" style="right:0"></div>
-                                            <div class="card" style="right:5%"></div>
-                                            <div class="card" style="right:10%"></div>
-                                            <div class="card" style="right:15%"></div>
-                                            <div class="card" style="right:20%">
-                                                <div class="more">+52</div>
-                                            </div>
-
-                                        </div>
-
-
-                                    </div>
-
-                                </div>-->
                             </div>
 
 
@@ -306,11 +159,10 @@
 
                             <div class="player_cards">
 
-                                <div class="card symbol-1 value-6" style="left: 109px;" onclick="playCard(this,new Card(1,6))"></div>
-                                <div class="card symbol-2 value-7" style="left: 218px;" onclick="playCard(this,new Card(2,7))"></div>
-                                <div class="card symbol-3 value-8" style="left: 327px;" onclick="playCard(this,new Card(3,8))"></div>
-                                <div class="card symbol-4 value-9" style="left: 436px;" onclick="playCard(this,new Card(4,9))"></div>
-
+                                <div class="card symbol-1 value-6 playable" style="left: 109px;" onclick="Controller.playCard(this)" data-card-value="6" data-card-symbol="1"></div>
+                                <div class="card symbol-2 value-7 playable" style="left: 218px;" onclick="Controller.playCard(this)" data-card-value="7" data-card-symbol="2"></div>
+                                <div class="card symbol-3 value-8 playable" style="left: 327px;" onclick="Controller.playCard(this)" data-card-value="8" data-card-symbol="3"></div>
+                                <div class="card symbol-4 value-9 playable" style="left: 436px;" onclick="Controller.playCard(this)" data-card-value="9" data-card-symbol="4"></div>
 
                             </div>
 
@@ -325,183 +177,6 @@
 
 
     </div>
-    <!--<div id="player_top" style="margin-right: 200px;">
-
-        <div class="player_horizontal" style="float: right; width:33%">
-
-            <div class="player">
-                <div class="avatar"></div>
-                <div class="name">Vitali123</div>
-            </div>
-
-            <div class="player_cards">
-
-                <div class="card" style="right:0"></div>
-                <div class="card" style="right:5%"></div>
-                <div class="card" style="right:10%"></div>
-                <div class="card" style="right:15%"></div>
-                <div class="card" style="right:20%"></div>
-
-            </div>
-
-        </div>
-
-        <div class="player_horizontal" style="float: right; width:33%">
-
-            <div class="player">
-                <div class="avatar"></div>
-                <div class="name">Vitali123</div>
-            </div>
-
-            <div class="player_cards">
-
-                <div class="card" style="right:0"></div>
-                <div class="card" style="right:5%"></div>
-                <div class="card" style="right:10%"></div>
-                <div class="card" style="right:15%"></div>
-                <div class="card" style="right:20%"></div>
-
-            </div>
-
-        </div>
-
-        <div class="player_horizontal" style="float: right; width:33%">
-
-            <div class="player">
-                <div class="avatar"></div>
-                <div class="name">Vitali123</div>
-            </div>
-
-            <div class="player_cards">
-
-                <div class="card" style="right:0"></div>
-                <div class="card" style="right:5%"></div>
-                <div class="card" style="right:10%"></div>
-                <div class="card" style="right:15%"></div>
-                <div class="card" style="right:20%">
-                    <div class="more">+52</div>
-                </div>
-
-            </div>
-
-
-        </div>
-
-        <div style="clear:both"></div>
-
-
-    </div>
-
-    <div id="player_right" style="position:absolute; right: 50px; width: 300px; top: 200px; ">
-
-        <div class="player_vertical" style="height: 120px;">
-
-            <div class="player">
-                <div class="avatar"></div>
-                <div class="name">Vitali123</div>
-            </div>
-
-            <div class="player_cards">
-
-                <div class="card" style="right:0"></div>
-                <div class="card" style="right:5%"></div>
-                <div class="card" style="right:10%"></div>
-                <div class="card" style="right:15%"></div>
-                <div class="card" style="right:20%">
-                    <div class="more">+52</div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="player_vertical" style="height: 120px;">
-
-            <div class="player">
-                <div class="avatar"></div>
-                <div class="name">Vitali123</div>
-            </div>
-
-            <div class="player_cards">
-
-                <div class="card" style="right:0"></div>
-                <div class="card" style="right:5%"></div>
-                <div class="card" style="right:10%"></div>
-                <div class="card" style="right:15%"></div>
-                <div class="card" style="right:20%">
-                    <div class="more">+52</div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-
-    <div id="bottom_container" style="position:absolute; bottom: 0px; left:0px; right:0px;">
-
-        <div style="text-align: center; ">
-            <input type="button" value="Karten nehmen"/>
-            <input type="button" value="Zug beenden"/>
-        </div>
-
-        <div id="player_bottom">
-            <div class="player_vertical" style="height: 120px; ">
-
-                <div class="player">
-                    <div class="avatar"></div>
-                    <div class="name">Vitali123</div>
-                </div>
-
-                <div class="player_cards">
-
-                    <div class="card" style="right:0"></div>
-                    <div class="card" style="right:5%"></div>
-                    <div class="card" style="right:10%"></div>
-                    <div class="card" style="right:15%"></div>
-                    <div class="card" style="right:20%">
-                        <div class="more">+52</div>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-
-
-    <div id="played_cards" style="top:40%; left:0px; right:0px; position:absolute; background: #f0f;">
-
-        <div id="deck" style="width: 300px; background: #0ff;">
-            <div class="player_cards">
-
-                <div class="card" style="left:0"></div>
-                <div class="card" style="left:5%"></div>
-                <div class="card" style="left:10%"></div>
-                <div class="card" style="left:15%"></div>
-                <div class="card" style="left:20%">
-                    <div class="more">+52</div>
-                </div>
-
-            </div>
-        </div>
-
-        <div id="current_cards">
-            <div class="player_cards">
-
-                <div class="card" style="right:0"></div>
-                <div class="card" style="right:5%"></div>
-                <div class="card" style="right:10%"></div>
-                <div class="card" style="right:15%"></div>
-                <div class="card" style="right:20%">
-                    <div class="more">+52</div>
-                </div>
-
-            </div>
-        </div>
-
-    </div>-->
-
 
 </div>
 </body>
