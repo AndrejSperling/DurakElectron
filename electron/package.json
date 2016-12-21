@@ -16,7 +16,11 @@
   "author": "Nikolai Kloss, Andrej Sperling",
   "license": "UNLICENSED",
   "devDependencies": {
+    "@types/jquery": "^2.0.34",
     "electron-packager": "^8.2.0",
     "electron-prebuilt": "^1.4.5"
+  },
+  "dependencies": {
+    "jquery": "^3.1.1"
   }
 }

@@ -12,20 +12,13 @@
     <link rel="stylesheet" href="files/css/player.css">
     <link rel="stylesheet" href="files/css/cards.css">
 
-    <style>
-        .row.vertical-align {
-            display: flex;
-            align-items: center;
-        }
-    </style>
-
     <script>
         var ControllerModule = require("../app/durak/controller");
-        var controller = new ControllerModule.AIController(document);
+        var controller = new ControllerModule.AIViewController();
     </script>
 
 </head>
-<body onload="controller.init(document)" style="height: 100%; min-height: 100%">
+<body onload="controller.onLoadView(document)" style="height: 100%; min-height: 100%">
 <div id="game_board" class="fill">
 
     <div class="container-fluid fill">
@@ -92,7 +85,7 @@
                     <div class="row vertical-align">
                         <div class="col-md-2">
 
-                            <div style="position: relative;">
+                            <div id="deckOfCards" style="position: relative;">
 
                                 <div class="card" style="left:0"></div>
                                 <div class="card" style="left:2%"></div>
@@ -140,8 +133,8 @@
             <tr>
                 <td>
                     <div style="text-align: center;">
-                        <input type="button" value="Karten nehmen"/>
-                        <input type="button" value="Zug beenden"/>
+                        <input type="button" id="takeCard" value="Karten nehmen"/>
+                        <input type="button" id="endMove" value="Zug beenden"/>
                     </div>
                 </td>
             </tr>

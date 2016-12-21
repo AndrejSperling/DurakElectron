@@ -11,3 +11,7 @@ body {
 .table > tbody > tr > td {
   border-top: none;
 }
+.row.vertical-align {
+  display: flex;
+  align-items: center;
+}
