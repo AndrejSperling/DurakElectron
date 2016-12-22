@@ -1,3 +1,119 @@
+html,
+body {
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
+}
+.fill {
+  min-height: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+.table > tbody > tr > td {
+  border-top: none;
+}
+.row.vertical-align {
+  display: flex;
+  align-items: center;
+}
+.match.enterdrop {
+  background-color: #ccc;
+}
+.match > .match.enterdrop {
+  background-color: #ffc;
+  border-radius: 5px;
+}
+#matchField {
+  background-color: #0ff;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: block;
+  height: 100%;
+  left: 0;
+  right: 0;
+}
+.card {
+  height: 108px;
+  width: 78px;
+  background-image: url("../images/cards_front_medium.jpg");
+  background-position: 0 -432px;
+  background-repeat: no-repeat;
+  position: absolute;
+  z-index: 0;
+}
+@media (min-width: 500px) {
+  .card {
+    background-image: url("../images/cards_front_small.jpg");
+  }
+}
+.card .more {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  padding-top: 13px;
+  border-radius: 24px;
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  top: 30px;
+  left: 15px;
+  font-size: 18px;
+  text-align: center;
+}
+.card.hide {
+  width: 25%;
+}
+.card.symbol-1 {
+  background-position-y: 0px;
+}
+.card.symbol-1:hover {
+  z-index: 100;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.card.symbol-2 {
+  background-position-y: -108px;
+}
+.card.symbol-2:hover {
+  z-index: 100;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.card.symbol-3 {
+  background-position-y: -216px;
+}
+.card.symbol-3:hover {
+  z-index: 100;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.card.symbol-4 {
+  background-position-y: -324px;
+}
+.card.symbol-4:hover {
+  z-index: 100;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.card.value-6 {
+  background-position-x: 0px;
+}
+.card.value-7 {
+  background-position-x: -78px;
+}
+.card.value-8 {
+  background-position-x: -156px;
+}
+.card.value-9 {
+  background-position-x: -234px;
+}
+.card.value-10 {
+  background-position-x: -312px;
+}
+.card.value-11 {
+  background-position-x: -390px;
+}
+.card.value-12 {
+  background-position-x: -468px;
+}
+.card.value-13 {
+  background-position-x: -546px;
+}
 #player_top {
   margin: 25px;
 }
@@ -18,7 +134,6 @@
   width: 50px;
   border-radius: 24px;
 }
-.player_cards {
-  position: relative;
-  right: 75px;
+#playersHand {
+  height: 148px;
 }

@@ -1,8 +1,8 @@
 .card {
-  height: 109px;
-  width: 79px;
+  height: 108px;
+  width: 78px;
   background-image: url("../images/cards_front_medium.jpg");
-  background-position: -622px 0px;
+  background-position: 0 -432px;
   background-repeat: no-repeat;
   position: absolute;
   z-index: 0;
@@ -14,19 +14,16 @@
 }
 .card .more {
   position: absolute;
-  top: 30px;
-  left: 15px;
-  height: 35px;
+  height: 50px;
   width: 50px;
-  padding-top: 15px;
+  padding-top: 13px;
   border-radius: 24px;
   background: rgba(0,0,0,0.8);
   color: #fff;
+  top: 30px;
+  left: 15px;
+  font-size: 18px;
   text-align: center;
-}
-.card:hover {
-  z-index: 100;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 .card.hide {
   width: 25%;
@@ -40,36 +37,52 @@
 .card.symbol-1 {
   background-position-y: 0px;
 }
+.card.symbol-1:hover {
+  z-index: 100;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
 .card.symbol-2 {
-  background-position-y: -109px;
+  background-position-y: -108px;
+}
+.card.symbol-2:hover {
+  z-index: 100;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 .card.symbol-3 {
-  background-position-y: -218px;
+  background-position-y: -216px;
+}
+.card.symbol-3:hover {
+  z-index: 100;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 .card.symbol-4 {
-  background-position-y: -327px;
+  background-position-y: -324px;
+}
+.card.symbol-4:hover {
+  z-index: 100;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 .card.value-6 {
   background-position-x: 0px;
 }
 .card.value-7 {
-  background-position-x: -79px;
+  background-position-x: -78px;
 }
 .card.value-8 {
-  background-position-x: -158px;
+  background-position-x: -156px;
 }
 .card.value-9 {
-  background-position-x: -237px;
+  background-position-x: -234px;
 }
 .card.value-10 {
-  background-position-x: -316px;
+  background-position-x: -312px;
 }
 .card.value-11 {
-  background-position-x: -395px;
+  background-position-x: -390px;
 }
 .card.value-12 {
-  background-position-x: -474px;
+  background-position-x: -468px;
 }
 .card.value-13 {
-  background-position-x: -553px;
+  background-position-x: -546px;
 }

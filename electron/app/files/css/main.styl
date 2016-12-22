@@ -1,3 +1,6 @@
+
+globalPadding = 20
+
 html, body{
   font-family: 'Roboto', sans-serif;
   height: 100%;
@@ -12,6 +15,79 @@ html, body{
 .table > tbody > tr > td
   border-top:none;
 
+
 .row.vertical-align
   display: flex;
   align-items: center;
+
+.match.enterdrop
+  background-color #ccc
+
+.match > .match.enterdrop
+  background-color #ffc
+  border-radius 5px
+
+#matchField
+  background-color #0ff
+  display block
+  position: relative;
+  border: 1px solid red;
+  overflow: hidden;
+
+
+
+
+
+
+
+
+
+#outer-dropzone {
+  height: 140px;
+}
+
+#inner-dropzone {
+  height: 80px;
+}
+
+.match {
+  background-color: #ccc;
+  border: dashed 4px transparent;
+  border-radius: 4px;
+  margin: 10px auto 30px;
+  padding: 10px;
+  width: 80%;
+  transition: background-color 0.3s;
+}
+
+.drop-active {
+  border-color: #aaa;
+}
+
+.drop-target {
+  background-color: #29e;
+  border-color: #fff;
+  border-style: solid;
+}
+
+.drag-drop {
+  display: inline-block;
+  min-width: 40px;
+  padding: 2em 0.5em;
+
+  color: #fff;
+  background-color: #29e;
+  border: solid 2px #fff;
+
+  -webkit-transform: translate(0px, 0px);
+  transform: translate(0px, 0px);
+
+  transition: background-color 0.3s;
+}
+
+.drag-drop.can-drop {
+  color: #000;
+  background-color: #4e4;
+}
+
+

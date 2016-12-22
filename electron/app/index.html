@@ -12,13 +12,15 @@
     <link rel="stylesheet" href="files/css/player.css">
     <link rel="stylesheet" href="files/css/cards.css">
 
+    <script lang="text/javascript" src="http://code.interactjs.io/v1.2.6/interact.min.js"></script>
+
     <script>
         var ControllerModule = require("../app/durak/controller");
         var controller = new ControllerModule.AIViewController();
     </script>
 
 </head>
-<body onload="controller.onLoadView(document)" style="height: 100%; min-height: 100%">
+<body onload="controller.onLoadView(window, document)" style="height: 100%; min-height: 100%">
 <div id="game_board" class="fill">
 
     <div class="container-fluid fill">
@@ -26,9 +28,9 @@
         <table class="table" style="height: 100%; min-height:100%; margin-bottom: 0px;">
 
             <tr>
-                <td>
+                <td style="height: 120px;">
                     <!-- Top Row -->
-                    <div class="row" style="height: 120px;">
+                    <div class="row">
 
                         <div class="col-md-10">
 
@@ -38,8 +40,7 @@
                                 <div class="col-md-5"></div>
                                 <div class="col-md-3">
 
-                                    <!-- Player Top Right -->
-                                    <div class="player_horizontal">
+                                    <div class="player_container">
 
                                         <div class="player">
                                             <div class="avatar"></div>
@@ -47,17 +48,10 @@
                                         </div>
 
                                         <div class="player_cards">
-
-                                            <div class="card" style="right:0"></div>
-                                            <div class="card" style="right:5%"></div>
-                                            <div class="card" style="right:10%"></div>
-                                            <div class="card" style="right:15%"></div>
-                                            <div class="card" style="right:20%">
-                                                <div class="more">+52</div>
+                                            <div class="card">
+                                                <div class="more">52</div>
                                             </div>
-
                                         </div>
-
 
                                     </div>
 
@@ -80,70 +74,84 @@
             </tr>
 
             <tr>
-                <td>
+                <td style="position: relative;">
                     <!-- Middle Row -->
                     <div class="row vertical-align">
-                        <div class="col-md-2">
+                        <div class="col-md-3">
 
-                            <div id="deckOfCards" style="position: relative;">
+                            <div id="deckOfCards">
 
-                                <div class="card" style="left:0"></div>
-                                <div class="card" style="left:2%"></div>
-                                <div class="card" style="left:4%"></div>
-                                <div class="card" style="left:8%"></div>
-                                <div class="card" style="left:12%">
+                                <div class="card">
                                     <div class="more">52</div>
                                 </div>
 
                             </div>
 
                         </div>
-                        <div class="col-md-6">
 
-                            <div class="match"
-                                 style="height: 140px; width: 120px; position: relative; float:left;">
-                                <div class="defence card symbol-1 value-6"
-                                     style="position: absolute; left: 0px; top: 0px;"></div>
-                                <div class="attack card symbol-1 value-7"
-                                     style="position: absolute; right: 0px; bottom: 0px;"></div>
-                            </div>
+                        <div class="col-md-9 match" style="left: 200px; right: 0; position: absolute; bottom: 0; height: 100%; min-height: 100%;">
 
+                            <div class="row">
 
-                            <div class="match"
-                                 style="height: 140px; width: 120px; position: relative;float:left;">
-                                <div class="defence card symbol-1 value-6"
-                                     style="position: absolute; left: 0px; top: 0px;"></div>
-                                <div class="attack card symbol-1 value-7"
-                                     style="position: absolute; right: 0px; bottom: 0px;"></div>
-                            </div>
+                                <div class="col-md-3 ">
+                                    <div class="match"
+                                         style="height: 140px; width: 120px; position: relative; float:left;">
+                                        <div class="defence card symbol-1 value-6"
+                                             style="position: absolute; left: 0px; top: 0px;"></div>
+                                        <div class="attack card symbol-1 value-7"
+                                             style="position: absolute; right: 0px; bottom: 0px;"></div>
+                                    </div>
+                                </div>
 
-                            <div class="match"
-                                 style="height: 140px; width: 120px; position: relative;float:left;">
-                                <div class="defence card symbol-1 value-6"
-                                     style="position: absolute; left: 0px; top: 0px;"></div>
-                                <div class="attack card symbol-1 value-7"
-                                     style="position: absolute; right: 0px; bottom: 0px;"></div>
+                                <div class="col-md-3 ">
+                                    <div class="match"
+                                         style="height: 140px; width: 120px; position: relative;float:left;">
+                                        <div class="defence card symbol-1 value-6"
+                                             style="position: absolute; left: 0px; top: 0px;"></div>
+                                        <div class="attack card symbol-1 value-7"
+                                             style="position: absolute; right: 0px; bottom: 0px;"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 ">
+                                    <div class="match"
+                                         style="height: 140px; width: 120px; position: relative;float:left;">
+                                        <div class="defence card symbol-1 value-6"
+                                             style="position: absolute; left: 0px; top: 0px;"></div>
+                                        <div class="attack card symbol-1 value-7"
+                                             style="position: absolute; right: 0px; bottom: 0px;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 ">
+                                    <div class="match"
+                                         style="height: 140px; width: 120px; position: relative;float:left;">
+                                        <div class="defence card symbol-1 value-6"
+                                             style="position: absolute; left: 0px; top: 0px;"></div>
+                                        <div class="attack card symbol-1 value-7"
+                                             style="position: absolute; right: 0px; bottom: 0px;"></div>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
-                        <div class="col-md-2"></div>
+
                     </div>
                 </td>
             </tr>
             <tr>
-                <td>
-                    <div style="text-align: center;">
+                <td style="height: 30px;">
+                    <div style="text-align: center; height: 30px;">
                         <input type="button" id="takeCard" value="Karten nehmen"/>
                         <input type="button" id="endMove" value="Zug beenden"/>
                     </div>
                 </td>
             </tr>
             <tr>
-                <td>
+                <td id="playersHand">
                     <div class="col-md-3"></div>
                     <div class="col-md-6">
 
-                        <div class="player_horizontal">
+                        <div class="player_container">
 
                             <div class="player">
                                 <div class="avatar"></div>
@@ -152,10 +160,14 @@
 
                             <div class="player_cards">
 
-                                <div class="card symbol-1 value-6 playable" style="left: 109px;" data-card-value="6" data-card-symbol="1"></div>
-                                <div class="card symbol-2 value-7 playable" style="left: 218px;" data-card-value="7" data-card-symbol="2"></div>
-                                <div class="card symbol-3 value-8 playable" style="left: 327px;" data-card-value="8" data-card-symbol="3"></div>
-                                <div class="card symbol-4 value-9 playable" style="left: 436px;" data-card-value="9" data-card-symbol="4"></div>
+                                <div id="yes-drop" class="card symbol-1 value-6 playable" style="left: 109px;" data-card-value="6"
+                                     data-card-symbol="1"></div>
+                                <div class="card symbol-2 value-7 playable" style="left: 218px;" data-card-value="7"
+                                     data-card-symbol="2"></div>
+                                <div class="card symbol-3 value-8 playable" style="left: 327px;" data-card-value="8"
+                                     data-card-symbol="3"></div>
+                                <div class="card symbol-4 value-9 playable" style="left: 436px;" data-card-value="9"
+                                     data-card-symbol="4"></div>
 
                             </div>
 
@@ -172,7 +184,6 @@
     </div>
 
 </div>
-
 
 
 </body>
