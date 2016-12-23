@@ -5,6 +5,13 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+(function (CardSuit) {
+    CardSuit[CardSuit["KING"] = 0] = "KING";
+    CardSuit[CardSuit["QUEEN"] = 1] = "QUEEN";
+    CardSuit[CardSuit["JACK"] = 2] = "JACK";
+    CardSuit[CardSuit["ACE"] = 3] = "ACE";
+})(exports.CardSuit || (exports.CardSuit = {}));
+var CardSuit = exports.CardSuit;
 var Card = (function () {
     function Card(fv, av, s, v) {
         if (fv >= Card.MIN && fv <= Card.MAX) {

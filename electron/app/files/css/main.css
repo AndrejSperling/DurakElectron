@@ -16,18 +16,25 @@ body {
   align-items: center;
 }
 .match.enterdrop {
-  background-color: #ccc;
+  background-color: #ffc;
 }
 .match > .match.enterdrop {
   background-color: #ffc;
   border-radius: 5px;
 }
-#matchField {
-  background-color: #0ff;
-  display: block;
+.match .match {
+  height: 140px;
+  width: 120px;
   position: relative;
-  border: 1px solid #f00;
-  overflow: hidden;
+  float: left;
+}
+#matchField {
+  left: 200px;
+  right: 0;
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  min-height: 100%;
 }
 #outer-dropzone {
   height: 140px;
@@ -36,7 +43,6 @@ body {
   height: 80px;
 }
 .match {
-  background-color: #ccc;
   border: dashed 4px transparent;
   border-radius: 4px;
   margin: 10px auto 30px;
@@ -44,26 +50,121 @@ body {
   width: 80%;
   transition: background-color 0.3s;
 }
-.drop-active {
-  border-color: #aaa;
+.card {
+  height: 108px;
+  width: 78px;
+  background-image: url("../images/cards_front_medium.jpg");
+  background-position: 0 -432px;
+  background-repeat: no-repeat;
+  position: absolute;
+  z-index: 0;
 }
-.drop-target {
-  background-color: #29e;
-  border-color: #fff;
-  border-style: solid;
+@media (min-width: 500px) {
+  .card {
+    background-image: url("../images/cards_front_small.jpg");
+  }
 }
-.drag-drop {
-  display: inline-block;
-  min-width: 40px;
-  padding: 2em 0.5em;
+.card .more {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  padding-top: 13px;
+  border-radius: 24px;
+  background: rgba(0,0,0,0.8);
   color: #fff;
-  background-color: #29e;
-  border: solid 2px #fff;
-  -webkit-transform: translate(0px, 0px);
-  transform: translate(0px, 0px);
-  transition: background-color 0.3s;
+  top: 30px;
+  left: 15px;
+  font-size: 18px;
+  text-align: center;
 }
-.drag-drop.can-drop {
-  color: #000;
-  background-color: #4e4;
+.card.hide {
+  width: 25%;
+}
+.card.trump {
+  transform: translate(30px, 0px) rotate(90deg);
+}
+.card.symbol-1 {
+  background-position-y: 0px;
+}
+.card.symbol-1:hover {
+  z-index: 100;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.card.symbol-2 {
+  background-position-y: -108px;
+}
+.card.symbol-2:hover {
+  z-index: 100;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.card.symbol-3 {
+  background-position-y: -216px;
+}
+.card.symbol-3:hover {
+  z-index: 100;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.card.symbol-4 {
+  background-position-y: -324px;
+}
+.card.symbol-4:hover {
+  z-index: 100;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.card.value-6 {
+  background-position-x: 0px;
+}
+.card.value-7 {
+  background-position-x: -78px;
+}
+.card.value-8 {
+  background-position-x: -156px;
+}
+.card.value-9 {
+  background-position-x: -234px;
+}
+.card.value-10 {
+  background-position-x: -312px;
+}
+.card.value-11 {
+  background-position-x: -390px;
+}
+.card.value-12 {
+  background-position-x: -468px;
+}
+.card.value-13 {
+  background-position-x: -546px;
+}
+.attack {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.defend {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+#player_top {
+  margin: 25px;
+}
+.player {
+  width: 50px;
+  padding-top: 10px;
+  float: right;
+}
+.player .name {
+  font-size: 12px;
+  padding-top: 10px;
+  text-align: center;
+}
+.player .avatar {
+  background-image: url("../images/avatar.png");
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+  border-radius: 24px;
+}
+#playersHand {
+  height: 148px;
 }

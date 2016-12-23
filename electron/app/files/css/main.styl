@@ -1,5 +1,4 @@
-
-globalPadding = 20
+@require "vars"
 
 html, body{
   font-family: 'Roboto', sans-serif;
@@ -21,26 +20,25 @@ html, body{
   align-items: center;
 
 .match.enterdrop
-  background-color #ccc
+  background-color #ffc
 
 .match > .match.enterdrop
   background-color #ffc
   border-radius 5px
 
-#matchField
-  background-color #0ff
-  display block
+.match .match
+  height: 140px;
+  width: 120px;
   position: relative;
-  border: 1px solid red;
-  overflow: hidden;
+  float:left;
 
-
-
-
-
-
-
-
+#matchField
+  left: 200px;
+  right: 0;
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  min-height: 100%;
 
 #outer-dropzone {
   height: 140px;
@@ -51,7 +49,6 @@ html, body{
 }
 
 .match {
-  background-color: #ccc;
   border: dashed 4px transparent;
   border-radius: 4px;
   margin: 10px auto 30px;
@@ -60,34 +57,5 @@ html, body{
   transition: background-color 0.3s;
 }
 
-.drop-active {
-  border-color: #aaa;
-}
-
-.drop-target {
-  background-color: #29e;
-  border-color: #fff;
-  border-style: solid;
-}
-
-.drag-drop {
-  display: inline-block;
-  min-width: 40px;
-  padding: 2em 0.5em;
-
-  color: #fff;
-  background-color: #29e;
-  border: solid 2px #fff;
-
-  -webkit-transform: translate(0px, 0px);
-  transform: translate(0px, 0px);
-
-  transition: background-color 0.3s;
-}
-
-.drag-drop.can-drop {
-  color: #000;
-  background-color: #4e4;
-}
-
-
+@require "cards"
+@require "player"

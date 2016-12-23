@@ -28,6 +28,9 @@
 .card.hide {
   width: 25%;
 }
+.card.trump {
+  transform: translate(30px, 0px) rotate(90deg);
+}
 /*
 1. Herz
 2. Karo
@@ -85,4 +88,14 @@
 }
 .card.value-13 {
   background-position-x: -546px;
+}
+.attack {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.defend {
+  position: absolute;
+  left: 0;
+  top: 0;
 }

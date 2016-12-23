@@ -9,14 +9,12 @@
 
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="files/css/main.css">
-    <link rel="stylesheet" href="files/css/player.css">
-    <link rel="stylesheet" href="files/css/cards.css">
 
     <script lang="text/javascript" src="http://code.interactjs.io/v1.2.6/interact.min.js"></script>
 
     <script>
-        var ControllerModule = require("../app/durak/controller");
-        var controller = new ControllerModule.AIViewController();
+        var GameController = require("../app/durak/GameController").GameController;
+        var controller = new GameController();
     </script>
 
 </head>
@@ -28,7 +26,7 @@
         <table class="table" style="height: 100%; min-height:100%; margin-bottom: 0px;">
 
             <tr>
-                <td style="height: 120px;">
+                <td style="height: 200px;">
                     <!-- Top Row -->
                     <div class="row">
 
@@ -81,6 +79,7 @@
 
                             <div id="deckOfCards">
 
+                                <div class="card symbol-1 value-6 trump"></div>
                                 <div class="card">
                                     <div class="more">52</div>
                                 </div>
@@ -89,22 +88,20 @@
 
                         </div>
 
-                        <div class="col-md-9 match" style="left: 200px; right: 0; position: absolute; bottom: 0; height: 100%; min-height: 100%;">
+                        <div class="col-md-9 match matchable" id="matchField">
 
                             <div class="row">
 
                                 <div class="col-md-3 ">
-                                    <div class="match"
+                                    <div class="match matchable"
                                          style="height: 140px; width: 120px; position: relative; float:left;">
-                                        <div class="defence card symbol-1 value-6"
-                                             style="position: absolute; left: 0px; top: 0px;"></div>
-                                        <div class="attack card symbol-1 value-7"
-                                             style="position: absolute; right: 0px; bottom: 0px;"></div>
+                                        <div class="defend card symbol-1 value-6"></div>
+                                        <div class="attack card symbol-1 value-7"></div>
                                     </div>
                                 </div>
 
                                 <div class="col-md-3 ">
-                                    <div class="match"
+                                    <div class="match matchable"
                                          style="height: 140px; width: 120px; position: relative;float:left;">
                                         <div class="defence card symbol-1 value-6"
                                              style="position: absolute; left: 0px; top: 0px;"></div>
@@ -113,7 +110,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3 ">
-                                    <div class="match"
+                                    <div class="match matchable"
                                          style="height: 140px; width: 120px; position: relative;float:left;">
                                         <div class="defence card symbol-1 value-6"
                                              style="position: absolute; left: 0px; top: 0px;"></div>
@@ -123,7 +120,7 @@
                                 </div>
 
                                 <div class="col-md-3 ">
-                                    <div class="match"
+                                    <div class="match matchable"
                                          style="height: 140px; width: 120px; position: relative;float:left;">
                                         <div class="defence card symbol-1 value-6"
                                              style="position: absolute; left: 0px; top: 0px;"></div>

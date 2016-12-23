@@ -1,6 +1,11 @@
 // SPIEL
 
+export enum CardSuit{
+    KING, QUEEN, JACK, ACE
+}
+
 export class Card {
+
     public static JACK: number = 11;
     public static QUEEN: number = 12;
     public static KING: number = 13;

@@ -1,6 +1,4 @@
-cardBackground = "../images/cards_front_medium.jpg"
-cardHeight = 108px;
-cardWidth = 78px
+@require 'vars'
 
 bgPosX(x)
   background-position-x: x * -1
@@ -9,10 +7,10 @@ bgPosY(y)
   background-position-y: y * -1
 
 .card
-  height: cardHeight;
-  width: cardWidth;
-  background-image: url(cardBackground);
-  background-position: 0 cardHeight* -4;
+  height: CardHeight;
+  width: CardWidth;
+  background-image: url(CardBackground);
+  background-position: 0 CardHeight* -4;
   background-repeat: no-repeat;
   position: absolute;
   z-index: 0;
@@ -34,9 +32,13 @@ bgPosY(y)
   font-size: 18px;
   text-align center
 
+
 .card
   &.hide
     width 25%
+
+.card.trump
+  transform: translate(30px, 0px) rotate(90deg);
 
 /*
 1. Herz
@@ -50,42 +52,53 @@ cardHoverEffect()
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 .card.symbol-1
-  bgPosY(cardHeight* 0)
+  bgPosY(CardHeight* 0)
   cardHoverEffect()
 
 .card.symbol-2
-  bgPosY(cardHeight* 1)
+  bgPosY(CardHeight* 1)
   cardHoverEffect()
 
 .card.symbol-3
-  bgPosY(cardHeight* 2)
+  bgPosY(CardHeight* 2)
   cardHoverEffect()
 
 .card.symbol-4
-  bgPosY(cardHeight* 3)
+  bgPosY(CardHeight* 3)
   cardHoverEffect()
 
 .card.value-6
-  bgPosX(cardWidth* 0)
+  bgPosX(CardWidth* 0)
 
 .card.value-7
-  bgPosX(cardWidth* 1)
+  bgPosX(CardWidth* 1)
 
 .card.value-8
-  bgPosX(cardWidth* 2)
+  bgPosX(CardWidth* 2)
 
 .card.value-9
-  bgPosX(cardWidth* 3)
+  bgPosX(CardWidth* 3)
 
 .card.value-10
-  bgPosX(cardWidth* 4)
+  bgPosX(CardWidth* 4)
 
 .card.value-11
-  bgPosX(cardWidth* 5)
+  bgPosX(CardWidth* 5)
 
 .card.value-12
-  bgPosX(cardWidth* 6)
+  bgPosX(CardWidth* 6)
 
 .card.value-13
-  bgPosX(cardWidth* 7)
+  bgPosX(CardWidth* 7)
+
+
+.attack
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+.defend
+  position: absolute;
+  left: 0;
+  top: 0;
 
