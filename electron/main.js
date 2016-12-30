@@ -5,6 +5,12 @@ const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const url = require('url')
 
+global.sharedObject = {
+    'user' : null
+};
+
+var test = "hallo";
+
 let mainWindow
 
 function createWindow() {

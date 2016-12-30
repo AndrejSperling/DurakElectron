@@ -16,13 +16,14 @@
   "author": "Nikolai Kloss, Andrej Sperling",
   "license": "UNLICENSED",
   "dependencies": {
+    "@types/interact.js": "*",
+    "@types/jquery": "*",
+    "@types/jqueryui": "*",
     "electron-packager": "^8.2.0",
     "electron-prebuilt": "^1.4.5",
-    "@types/jqueryui": "*",
-    "@types/jquery": "*",
-    "@types/interact.js":"*",
     "jquery": "*",
     "jquery-ui": "*",
+    "remote": "^0.2.6",
     "typescript": "^2.1.4"
   }
 }
