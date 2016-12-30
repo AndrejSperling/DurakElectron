@@ -1,7 +1,7 @@
 /// <reference types="@types/jquery" />
 /// <reference types="@types/interact.js" />
 import * as $ from "jquery";
-import {Card} from "./Durak";
+import {Card} from "../old/Durak";
 
 export abstract class ViewController {
 

@@ -1,4 +1,4 @@
-import {Durak, Card} from "./Durak";
+import {Durak, Card} from "../old/Durak";
 import {ViewController} from "./ViewController";
 
 export class GameController extends ViewController {

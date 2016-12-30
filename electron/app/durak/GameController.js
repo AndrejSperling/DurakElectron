@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var Durak_1 = require("./Durak");
+var Durak_1 = require("../old/Durak");
 var ViewController_1 = require("./ViewController");
 var GameController = (function (_super) {
     __extends(GameController, _super);

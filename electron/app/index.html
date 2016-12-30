@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="files/css/main.css">
 
     <script lang="text/javascript" src="http://code.interactjs.io/v1.2.6/interact.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 
     <script>
         var GameController = require("../app/durak/GameController").GameController;
@@ -19,6 +21,15 @@
 
 </head>
 <body onload="controller.onLoadView(window, document)" style="height: 100%; min-height: 100%">
+
+<script>
+    var socket = io();
+
+    socket.on('chat message', function(msg){
+        alert("Recoive: " + msg);
+    });
+</script>
+
 <div id="game_board" class="fill">
 
     <div class="container-fluid fill">
@@ -31,7 +42,6 @@
                     <div class="row">
 
                         <div class="col-md-10">
-
 
                             <!-- Top Row -->
                             <div class="row">

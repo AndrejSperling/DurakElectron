@@ -2,7 +2,7 @@
 /// <reference types="@types/jquery" />
 /// <reference types="@types/interact.js" />
 var $ = require("jquery");
-var Durak_1 = require("./Durak");
+var Durak_1 = require("../old/Durak");
 var ViewController = (function () {
     function ViewController() {
         this.DATA_SYMBOL = "data-card-symbol";
