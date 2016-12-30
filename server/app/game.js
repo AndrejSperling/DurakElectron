@@ -27,13 +27,18 @@ module.exports = function (io) {
                 'username': username
             });
             socket.user = {'username': username};
-            users[socket.user.username] = socket;
+            users[username] = socket;
+            console.log("UserNew: " + username);
+        });
+
+        socket.on('user.login', function (username, cb) {
+            socket.user = {'username': username};
+            users[username] = socket;
+            console.log("UserLogin: " + username);
         });
 
         socket.on('game.join', function (username, cb) {
 
-            console.log(username);
-            console.log(users);
             socket.emit('user.joined', {
                 'user': socket.user
             });

@@ -36,12 +36,13 @@
                 'username': name
             };
             user = require('electron').remote.getGlobal('sharedObject').user;
+            joinTheGame()
         });
 
-    }
-
-    if(user != null){
-        joinTheGame()
+    }else {
+        socket.emit('user.login', user.username, function (callback) {
+            joinTheGame()
+        });
     }
 
     function joinTheGame(){
