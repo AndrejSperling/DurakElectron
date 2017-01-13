@@ -1,7 +1,8 @@
 /// <reference types="@types/jquery" />
 /// <reference types="@types/interact.js" />
 import * as $ from "jquery";
-import {Card} from "../old/Durak";
+import {Card} from "./Card";
+import {Suit} from "./Suit";
 
 export abstract class ViewController {
 
@@ -33,6 +34,8 @@ export abstract class ViewController {
 
     protected matchField;
     protected matchFields;
+
+    protected isAttached = false;
 
     constructor() {
         ViewController.self = this;
@@ -91,7 +94,8 @@ export abstract class ViewController {
 
             }
         });
-        this.setIsAttacking()
+
+
         interact('.matchable').dropzone({
             accept: '.playable',
             overlap: 0.01,
@@ -162,31 +166,46 @@ export abstract class ViewController {
             target.setAttribute('data-y', y);
         }
 
+        this.isAttached = true;
+        this.setIsAttacking();
+
     }
 
     setIsAttacking() {
-        this.isAttacking = true;
-        this.matchField.addClass('matchable');
-        this.matchFields.removeClass('matchable');
+        if (this.isAttached) {
+            this.isAttacking = true;
+            this.matchField.addClass('matchable');
+            this.matchFields.removeClass('matchable');
+        }
     }
 
     setIsDefending() {
-        this.isAttacking = false;
-        this.matchField.removeClass('matchable');
-        this.matchFields.addClass('matchable');
+        if (this.isAttached) {
+            this.isAttacking = false;
+            this.matchField.removeClass('matchable');
+            this.matchFields.addClass('matchable');
+        }
     }
 
     private playMatch(dragzone, element) {
 
         let matchContainer = $('<div class="col-md-3"><div class="match ' + (this.isAttacking ? "" : "matchable") + '"></div></div>');
 
-        $(element).removeAttr('style')
+        // Attacking card
+        $(element)
+            .addClass('attack')
+            .removeAttr('style')
             .removeClass('playable');
 
         matchContainer.find('.match').prepend(element);
-        $(dragzone).find('.row').append(matchContainer)
 
-        this.attack(new Card(2, 3, 'C', true))
+        // MatchField
+        $(dragzone).find('.row').append(matchContainer);
+
+        let symbol = $(element).data('card-symbol');
+        let value = $(element).data('card-value');
+
+        this.attack(new Card(value, this.symbolToSuit(symbol)))
     }
 
     private defendMatch(dragzone, element) {
@@ -200,8 +219,30 @@ export abstract class ViewController {
             .append(element)
             .removeClass('matchable');
 
-        this.attack(new Card(2, 3, 'C', true))
+        let attackCard = $(dragzone).find(".attack");
 
+        let attackCardValue  = attackCard.data('card-symbol');
+        let attackCardSymbol = attackCard.data('card-value');
+        let attack = new Card(attackCardValue, this.symbolToSuit(attackCardSymbol));
+
+        let value = $(element).data('card-value');
+        let symbol = $(element).data('card-symbol');
+        let defend = new Card(value, this.symbolToSuit(symbol));
+
+        this.defend(attack, defend);
+    }
+
+    private symbolToSuit(symbolNumber: number): Suit {
+        switch (symbolNumber) {
+            case 1:
+                return Suit.HEART;
+            case 2:
+                return Suit.DIAMOND;
+            case 3:
+                return Suit.CLUB;
+            case 4:
+                return Suit.SPADES;
+        }
     }
 
     get cardsOnDeck(): number {
@@ -250,13 +291,8 @@ export abstract class ViewController {
 
     }
 
-    private bla() {
-        alert("Hmmm")
-    }
-
     renderViews() {
         console.log(this);
-        this.bla();
         //ViewController.renderDeckOfCards();
         //ViewController.renderOwnDeck();
     }
@@ -267,6 +303,6 @@ export abstract class ViewController {
 
     abstract attack(card: Card)
 
-    abstract defend(toDefend: Card, defendWith: Card)
+    abstract defend(attack: Card, defend: Card)
 
 }

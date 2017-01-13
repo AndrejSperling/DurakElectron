@@ -135,12 +135,12 @@ body {
 .card.value-13 {
   background-position-x: -546px;
 }
-.attack {
+.defend {
   position: absolute;
   right: 0;
   bottom: 0;
 }
-.defend {
+.attack {
   position: absolute;
   left: 0;
   top: 0;

@@ -1,19 +1,14 @@
 // SPIEL
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var CardSuit;
 (function (CardSuit) {
     CardSuit[CardSuit["KING"] = 0] = "KING";
     CardSuit[CardSuit["QUEEN"] = 1] = "QUEEN";
     CardSuit[CardSuit["JACK"] = 2] = "JACK";
     CardSuit[CardSuit["ACE"] = 3] = "ACE";
-})(exports.CardSuit || (exports.CardSuit = {}));
-var CardSuit = exports.CardSuit;
-var Card = (function () {
-    function Card(fv, av, s, v) {
+})(CardSuit = exports.CardSuit || (exports.CardSuit = {}));
+class Card {
+    constructor(fv, av, s, v) {
         if (fv >= Card.MIN && fv <= Card.MAX) {
             this._faceValue = fv;
         }
@@ -29,7 +24,7 @@ var Card = (function () {
         }
         this._visible = v;
     }
-    Card.prototype.toString = function () {
+    toString() {
         if (this._visible !== true) {
             return "??";
         }
@@ -56,123 +51,88 @@ var Card = (function () {
         }
         face = face + this._suit;
         return face;
-    };
-    Card.prototype.isPictureCad = function () {
+    }
+    isPictureCad() {
         if (this._faceValue >= Card.JACK && this._faceValue <= Card.KING) {
             return true;
         }
         return false;
-    };
-    Object.defineProperty(Card.prototype, "faceValue", {
-        get: function () {
-            return this._faceValue;
-        },
-        set: function (value) {
-            this._faceValue = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Card.prototype, "actualValue", {
-        get: function () {
-            return this._actualValue;
-        },
-        set: function (value) {
-            this._actualValue = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Card.prototype, "suit", {
-        get: function () {
-            return this._suit;
-        },
-        set: function (value) {
-            this._suit = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Card.prototype, "visible", {
-        get: function () {
-            return this._visible;
-        },
-        set: function (value) {
-            this._visible = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Card.JACK = 11;
-    Card.QUEEN = 12;
-    Card.KING = 13;
-    Card.ACE = 14;
-    Card.MIN = 2;
-    Card.MAX = 14;
-    Card.suits = ["C", "D", "H", "S"];
-    return Card;
-}());
+    }
+    set faceValue(value) {
+        this._faceValue = value;
+    }
+    set actualValue(value) {
+        this._actualValue = value;
+    }
+    set suit(value) {
+        this._suit = value;
+    }
+    set visible(value) {
+        this._visible = value;
+    }
+    get faceValue() {
+        return this._faceValue;
+    }
+    get actualValue() {
+        return this._actualValue;
+    }
+    get suit() {
+        return this._suit;
+    }
+    get visible() {
+        return this._visible;
+    }
+}
+Card.JACK = 11;
+Card.QUEEN = 12;
+Card.KING = 13;
+Card.ACE = 14;
+Card.MIN = 2;
+Card.MAX = 14;
+Card.suits = ["C", "D", "H", "S"];
 exports.Card = Card;
-var RenderedCard = (function (_super) {
-    __extends(RenderedCard, _super);
-    function RenderedCard(fv, s, v, hs) {
-        _super.call(this, fv, fv, s, v);
+class RenderedCard extends Card {
+    constructor(fv, s, v, hs) {
+        super(fv, fv, s, v);
         this._isHeighSuit = hs;
     }
-    RenderedCard.prototype.paint = function (g) {
+    paint(g) {
         if (!this.visible) {
         }
         else {
         }
-    };
-    RenderedCard.prototype.update = function (g) {
+    }
+    update(g) {
         this.paint(g);
-    };
-    Object.defineProperty(RenderedCard.prototype, "image", {
-        get: function () {
-            return this._image;
-        },
-        set: function (value) {
-            this._image = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(RenderedCard.prototype, "offscreen", {
-        get: function () {
-            return this._offscreen;
-        },
-        set: function (value) {
-            this._offscreen = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(RenderedCard.prototype, "isHeighSuit", {
-        get: function () {
-            return this._isHeighSuit;
-        },
-        set: function (value) {
-            this._isHeighSuit = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(RenderedCard.prototype, "dim", {
-        get: function () {
-            return this._dim;
-        },
-        set: function (value) {
-            this._dim = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return RenderedCard;
-}(Card));
+    }
+    get image() {
+        return this._image;
+    }
+    set image(value) {
+        this._image = value;
+    }
+    get offscreen() {
+        return this._offscreen;
+    }
+    set offscreen(value) {
+        this._offscreen = value;
+    }
+    get isHeighSuit() {
+        return this._isHeighSuit;
+    }
+    set isHeighSuit(value) {
+        this._isHeighSuit = value;
+    }
+    get dim() {
+        return this._dim;
+    }
+    set dim(value) {
+        this._dim = value;
+    }
+}
 exports.RenderedCard = RenderedCard;
-var CardDeck = (function () {
-    function CardDeck() {
+class CardDeck {
+    constructor() {
         this._top = 0;
         var numValues = Card.MAX - Card.MIN + 1;
         this._cards = Array((Card.suits.length * numValues));
@@ -185,54 +145,44 @@ var CardDeck = (function () {
             }
         }
     }
-    CardDeck.prototype.list = function () {
+    list() {
         for (var x = 0; x < this._cards.length; x++) {
             console.log(this._cards[x].toString());
         }
-    };
-    CardDeck.prototype.deal = function () {
+    }
+    deal() {
         var dealt = this._cards[this._top++];
         if (this._top > this._cards.length) {
             return null;
         }
         return dealt;
-    };
-    CardDeck.prototype.reset = function () {
+    }
+    reset() {
         this._top = 0;
-    };
-    CardDeck.prototype.getNumCardsLeft = function () {
+    }
+    getNumCardsLeft() {
         return this._cards.length - this._top;
-    };
-    Object.defineProperty(CardDeck.prototype, "top", {
-        get: function () {
-            return this._top;
-        },
-        set: function (value) {
-            this._top = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(CardDeck.prototype, "cards", {
-        get: function () {
-            return this._cards;
-        },
-        set: function (value) {
-            this._cards = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return CardDeck;
-}());
+    }
+    get top() {
+        return this._top;
+    }
+    set top(value) {
+        this._top = value;
+    }
+    get cards() {
+        return this._cards;
+    }
+    set cards(value) {
+        this._cards = value;
+    }
+}
 exports.CardDeck = CardDeck;
-var RandomCardDeck = (function (_super) {
-    __extends(RandomCardDeck, _super);
-    function RandomCardDeck() {
-        _super.call(this);
+class RandomCardDeck extends CardDeck {
+    constructor() {
+        super();
         this.shuffle();
     }
-    RandomCardDeck.prototype.shuffle = function () {
+    shuffle() {
         var shuffled = Array(this.cards.length);
         var cIndex = null;
         var placed = null;
@@ -248,21 +198,19 @@ var RandomCardDeck = (function (_super) {
         }
         this.cards = shuffled.slice(0);
         this.top = 0;
-    };
-    RandomCardDeck.prototype.reset = function () {
-        _super.prototype.reset.call(this);
+    }
+    reset() {
+        super.reset();
         this.shuffle();
-    };
-    return RandomCardDeck;
-}(CardDeck));
+    }
+}
 exports.RandomCardDeck = RandomCardDeck;
-var DurakDeck = (function (_super) {
-    __extends(DurakDeck, _super);
-    function DurakDeck() {
-        _super.call(this);
+class DurakDeck extends RandomCardDeck {
+    constructor() {
+        super();
         this.selectCards();
     }
-    DurakDeck.prototype.selectCards = function () {
+    selectCards() {
         //Filtert alle Karten mit Wert < 6 herraus
         var i = 0;
         var selected = Array(36);
@@ -272,18 +220,14 @@ var DurakDeck = (function (_super) {
             }
         }
         this.cards = selected;
-    };
-    return DurakDeck;
-}(RandomCardDeck));
-exports.DurakDeck = DurakDeck;
-var Splash = (function () {
-    function Splash() {
     }
-    return Splash;
-}());
+}
+exports.DurakDeck = DurakDeck;
+class Splash {
+}
 exports.Splash = Splash;
-var Durak = (function () {
-    function Durak(testV) {
+class Durak {
+    constructor(testV) {
         this.playersTurn = true;
         this.playerHasDefended = false;
         this.endGame = false;
@@ -295,7 +239,7 @@ var Durak = (function () {
         this.dealCards();
         this.testV = testV;
     }
-    Durak.prototype.dealCards = function () {
+    dealCards() {
         //Karten austeilen
         this.getHighCard();
         for (var c = 0; c < 6; c++) {
@@ -310,14 +254,14 @@ var Durak = (function () {
                 this.deck.cards[i].isHeighSuit = true;
             }
         }
-    };
-    Durak.prototype.getHighCard = function () {
+    }
+    getHighCard() {
         this.highCard = this.deck.cards[this.deck.cards.length - 1];
-    };
-    Durak.prototype.initFrame = function () {
+    }
+    initFrame() {
         // FENSTER ZEICHNEN USW
-    };
-    Durak.prototype.checkWinningCoditions = function () {
+    }
+    checkWinningCoditions() {
         if (this.playerHand.length === 0 && this.deck.getNumCardsLeft() === 0) {
             return true;
         }
@@ -325,15 +269,15 @@ var Durak = (function () {
             return true;
         }
         return false;
-    };
-    Durak.prototype.playerPicksUpCards = function () {
+    }
+    playerPicksUpCards() {
         //Schlucken
         this.playerHand = this.playerHand.concat(this.table);
         this.table = Array();
         this.refillCards(false);
         this.playersTurn = false;
-    };
-    Durak.prototype.refillCards = function (playerPicksUpFirst) {
+    }
+    refillCards(playerPicksUpFirst) {
         //Karten den spielern nachziehen lassen um wiedr 6 karten zu haben
         this.deck.list();
         if (playerPicksUpFirst) {
@@ -352,8 +296,8 @@ var Durak = (function () {
                 this.playerHand.push(this.deck.deal());
             }
         }
-    };
-    Durak.prototype.toString = function () {
+    }
+    toString() {
         var result = "";
         result += "Trumpf: " + this.highCard.toString() + "\n";
         result += "KI Hand (" + this.computerHand.length + "): \n";
@@ -371,8 +315,7 @@ var Durak = (function () {
         result += "Playersturn: " + this.playersTurn + "\n";
         result += "PlayerHasDefended: " + this.playerHasDefended + "\n";
         return result;
-    };
-    return Durak;
-}());
+    }
+}
 exports.Durak = Durak;
 // GUI 

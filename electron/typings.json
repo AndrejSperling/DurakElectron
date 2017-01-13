@@ -1,8 +1,10 @@
 {
   "globalDependencies": {
+    "electron": "registry:dt/electron#1.4.8+20161220141501",
     "interact": "registry:dt/interact#1.0.25+20161208130438",
     "interact.js": "registry:dt/interact.js#1.0.25+20161220195540",
     "jquery": "registry:dt/jquery#1.10.0+20161119044246",
-    "jqueryui": "registry:dt/jqueryui#1.11.0+20161214061125"
+    "jqueryui": "registry:dt/jqueryui#1.11.0+20161214061125",
+    "socket.io-client": "registry:dt/socket.io-client#1.4.4+20161116080703"
   }
 }

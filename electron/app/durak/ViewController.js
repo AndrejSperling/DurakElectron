@@ -1,10 +1,11 @@
 "use strict";
 /// <reference types="@types/jquery" />
 /// <reference types="@types/interact.js" />
-var $ = require("jquery");
-var Durak_1 = require("../old/Durak");
-var ViewController = (function () {
-    function ViewController() {
+const $ = require("jquery");
+const Card_1 = require("./Card");
+const Suit_1 = require("./Suit");
+class ViewController {
+    constructor() {
         this.DATA_SYMBOL = "data-card-symbol";
         this.DATA_VALUE = "data-card-value";
         this.PLAYABLE_CARDS = "playable";
@@ -18,27 +19,27 @@ var ViewController = (function () {
         this.SHOW_MAX_CARDS = 5;
         this._cardsOnDeck = 0;
         this.isAttacking = false;
+        this.isAttached = false;
         ViewController.self = this;
     }
-    ViewController.prototype.onLoadView = function (window, doc) {
-        var _this = this;
-        doc.getElementById(this.BUTTON_END_MOVE).onclick = function () {
-            _this.onClickEndMove();
+    onLoadView(window, doc) {
+        doc.getElementById(this.BUTTON_END_MOVE).onclick = () => {
+            this.onClickEndMove();
         };
-        doc.getElementById(this.BUTTON_TAKE_CARD).onclick = function () {
-            _this.onClickTakeCard();
+        doc.getElementById(this.BUTTON_TAKE_CARD).onclick = () => {
+            this.onClickTakeCard();
         };
         this.deckOfCardsView = doc.getElementById(this.DECK_OF_CARDS);
         this.matchFieldView = doc.getElementById(this.MATCH_FIELD);
-        var self = this;
-        var startX = 0;
-        var startY = 0;
-        var clonedElement;
-        var selectedElement;
+        let self = this;
+        let startX = 0;
+        let startY = 0;
+        let clonedElement;
+        let selectedElement;
         this.matchField = $('#matchField');
         this.matchFields = $('#matchField .match');
         // onLoadView clicklistener for cards
-        var startPos;
+        let startPos;
         interact('.playable').draggable({
             // enable inertial throwing
             inertia: true,
@@ -65,7 +66,6 @@ var ViewController = (function () {
                 }
             }
         });
-        this.setIsAttacking();
         interact('.matchable').dropzone({
             accept: '.playable',
             overlap: 0.01,
@@ -73,14 +73,14 @@ var ViewController = (function () {
             ondropactivate: function (event) {
                 event.target.classList.add('drop-active');
             },
-            ondragenter: function (event) {
-                var draggableElement = event.relatedTarget, dropzoneElement = event.target;
+            ondragenter: (event) => {
+                let draggableElement = event.relatedTarget, dropzoneElement = event.target;
                 dropzoneElement.classList.add('enterdrop');
             },
             ondragleave: function (event) {
                 console.log("ondragleave");
                 // remove the drop feedback style
-                var draggableElement = event.relatedTarget, dropzoneElement = event.target;
+                let draggableElement = event.relatedTarget, dropzoneElement = event.target;
                 dropzoneElement.classList.remove('drop-target');
                 dropzoneElement.classList.remove('enterdrop');
                 draggableElement.classList.remove('can-drop');
@@ -92,24 +92,24 @@ var ViewController = (function () {
                 event.target.classList.remove('drop-active');
                 event.target.classList.remove('drop-target');
             },
-            ondrop: function (event) {
+            ondrop: (event) => {
                 event.target.classList.remove('enterdrop');
                 event.relatedTarget.dropped = true;
-                var draggableElement = event.relatedTarget, dropzoneElement = event.target;
+                let draggableElement = event.relatedTarget, dropzoneElement = event.target;
                 console.log(draggableElement);
-                var isMatchField = $(dropzoneElement).is("#matchField");
-                if (_this.isAttacking && isMatchField) {
+                let isMatchField = $(dropzoneElement).is("#matchField");
+                if (this.isAttacking && isMatchField) {
                     // nur karten dazulegen
-                    _this.playMatch(dropzoneElement, draggableElement);
+                    this.playMatch(dropzoneElement, draggableElement);
                 }
                 else if (!isMatchField) {
                     // nur match match
-                    _this.defendMatch(dropzoneElement, draggableElement);
+                    this.defendMatch(dropzoneElement, draggableElement);
                 }
             }
         });
         function dragMoveListener(event) {
-            var target = event.target, 
+            let target = event.target, 
             // keep the dragged position in the data-x/data-y attributes
             x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx, y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
             // translate the element
@@ -120,26 +120,38 @@ var ViewController = (function () {
             target.setAttribute('data-x', x);
             target.setAttribute('data-y', y);
         }
-    };
-    ViewController.prototype.setIsAttacking = function () {
-        this.isAttacking = true;
-        this.matchField.addClass('matchable');
-        this.matchFields.removeClass('matchable');
-    };
-    ViewController.prototype.setIsDefending = function () {
-        this.isAttacking = false;
-        this.matchField.removeClass('matchable');
-        this.matchFields.addClass('matchable');
-    };
-    ViewController.prototype.playMatch = function (dragzone, element) {
-        var matchContainer = $('<div class="col-md-3"><div class="match ' + (this.isAttacking ? "" : "matchable") + '"></div></div>');
-        $(element).removeAttr('style')
+        this.isAttached = true;
+        this.setIsAttacking();
+    }
+    setIsAttacking() {
+        if (this.isAttached) {
+            this.isAttacking = true;
+            this.matchField.addClass('matchable');
+            this.matchFields.removeClass('matchable');
+        }
+    }
+    setIsDefending() {
+        if (this.isAttached) {
+            this.isAttacking = false;
+            this.matchField.removeClass('matchable');
+            this.matchFields.addClass('matchable');
+        }
+    }
+    playMatch(dragzone, element) {
+        let matchContainer = $('<div class="col-md-3"><div class="match ' + (this.isAttacking ? "" : "matchable") + '"></div></div>');
+        // Attacking card
+        $(element)
+            .addClass('attack')
+            .removeAttr('style')
             .removeClass('playable');
         matchContainer.find('.match').prepend(element);
+        // MatchField
         $(dragzone).find('.row').append(matchContainer);
-        this.attack(new Durak_1.Card(2, 3, 'C', true));
-    };
-    ViewController.prototype.defendMatch = function (dragzone, element) {
+        let symbol = $(element).data('card-symbol');
+        let value = $(element).data('card-value');
+        this.attack(new Card_1.Card(value, this.symbolToSuit(symbol)));
+    }
+    defendMatch(dragzone, element) {
         $(element)
             .removeAttr('style')
             .removeClass('playable')
@@ -147,54 +159,64 @@ var ViewController = (function () {
         $(dragzone)
             .append(element)
             .removeClass('matchable');
-        this.attack(new Durak_1.Card(2, 3, 'C', true));
-    };
-    Object.defineProperty(ViewController.prototype, "cardsOnDeck", {
-        get: function () {
-            return this._cardsOnDeck;
-        },
-        set: function (cards) {
-            this._cardsOnDeck = cards;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    ViewController.prototype.generateCardsView = function (parent, numberOfCards) {
-        var positionStep = 2;
-        var showCards = (numberOfCards > this.SHOW_MAX_CARDS) ? this.SHOW_MAX_CARDS : numberOfCards;
+        let attackCard = $(dragzone).find(".attack");
+        let attackCardValue = attackCard.data('card-symbol');
+        let attackCardSymbol = attackCard.data('card-value');
+        let attack = new Card_1.Card(attackCardValue, this.symbolToSuit(attackCardSymbol));
+        let value = $(element).data('card-value');
+        let symbol = $(element).data('card-symbol');
+        let defend = new Card_1.Card(value, this.symbolToSuit(symbol));
+        this.defend(attack, defend);
+    }
+    symbolToSuit(symbolNumber) {
+        switch (symbolNumber) {
+            case 1:
+                return Suit_1.Suit.HEART;
+            case 2:
+                return Suit_1.Suit.DIAMOND;
+            case 3:
+                return Suit_1.Suit.CLUB;
+            case 4:
+                return Suit_1.Suit.SPADES;
+        }
+    }
+    get cardsOnDeck() {
+        return this._cardsOnDeck;
+    }
+    set cardsOnDeck(cards) {
+        this._cardsOnDeck = cards;
+    }
+    generateCardsView(parent, numberOfCards) {
+        let positionStep = 2;
+        let showCards = (numberOfCards > this.SHOW_MAX_CARDS) ? this.SHOW_MAX_CARDS : numberOfCards;
         console.log(parent);
         while (parent.firstChild) {
             parent.removeChild(parent.firstChild);
         }
-        for (var i = 0; i < showCards; i++) {
-            var left = positionStep * i;
-            var div = $('<div></div>')
+        for (let i = 0; i < showCards; i++) {
+            let left = positionStep * i;
+            let div = $('<div></div>')
                 .addClass('card')
                 .attr('style', 'left:' + left + '%');
             div.appendTo(parent);
         }
         if (numberOfCards > showCards) {
-            var div = $('<div></div>')
+            let div = $('<div></div>')
                 .addClass('more')
                 .text(numberOfCards - showCards);
             div.appendTo(parent);
         }
-    };
-    ViewController.renderDeckOfCards = function () {
-        var self = ViewController.self;
+    }
+    static renderDeckOfCards() {
+        let self = ViewController.self;
         self.generateCardsView(self.deckOfCardsView, self._cardsOnDeck);
-    };
-    ViewController.renderOwnDeck = function () {
-    };
-    ViewController.prototype.bla = function () {
-        alert("Hmmm");
-    };
-    ViewController.prototype.renderViews = function () {
+    }
+    static renderOwnDeck() {
+    }
+    renderViews() {
         console.log(this);
-        this.bla();
         //ViewController.renderDeckOfCards();
         //ViewController.renderOwnDeck();
-    };
-    return ViewController;
-}());
+    }
+}
 exports.ViewController = ViewController;

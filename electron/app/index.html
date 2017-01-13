@@ -22,53 +22,6 @@
 </head>
 <body onload="controller.onLoadView(window, document)" style="height: 100%; min-height: 100%">
 
-<script>
-    var ip = "http://localhost:3000/";
-    var socket = io.connect(ip);
-    var user = require('electron').remote.getGlobal('sharedObject').user;
-    var self = this;
-
-    if (user == null) {
-
-        socket.emit('user.new', function (callback) {
-            var name = callback.username;
-            require('electron').remote.getGlobal('sharedObject').user = {
-                'username': name
-            };
-            user = require('electron').remote.getGlobal('sharedObject').user;
-        });
-
-    }
-
-    if(user != null){
-        joinTheGame()
-    }
-
-    function joinTheGame(){
-        console.log(user);
-        socket.emit('game.join', user.username, function(cb){
-
-        });
-    }
-
-    // Wrap the socket requests
-    var wrap = function (fn) {
-        return function () {
-            fn.apply(self, arguments);
-        };
-    };
-
-    // Register socket callbacks
-    socket.on('user.joined', wrap(joinGame));
-
-
-    function joinGame(data){
-        console.log("userJoines");
-        console.log(data)
-    }
-
-</script>
-
 <div id="game_board" class="fill">
 
     <div class="container-fluid fill">

@@ -19,11 +19,15 @@
     "@types/interact.js": "*",
     "@types/jquery": "*",
     "@types/jqueryui": "*",
+    "@types/socket.io-client": "^1.4.29",
     "electron-packager": "^8.2.0",
     "electron-prebuilt": "^1.4.5",
     "jquery": "*",
     "jquery-ui": "*",
     "remote": "^0.2.6",
     "typescript": "^2.1.4"
+  },
+  "devDependencies": {
+    "typings": "^2.1.0"
   }
 }

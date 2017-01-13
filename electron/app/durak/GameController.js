@@ -1,31 +1,98 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var Durak_1 = require("../old/Durak");
-var ViewController_1 = require("./ViewController");
-var GameController = (function (_super) {
-    __extends(GameController, _super);
-    function GameController() {
-        _super.call(this);
+const Durak_1 = require("../old/Durak");
+const ViewController_1 = require("./ViewController");
+const Config_1 = require("../Config");
+const electron_1 = require("electron");
+const io = require("socket.io-client");
+class GameController extends ViewController_1.ViewController {
+    constructor() {
+        super();
+        this.SOCKET_MAKE_MOVE = 'game.move.make';
+        this.SOCKET_MOVE_RECEIVED = 'game.move.received';
+        this.SOCKET_USER_JOINED = 'user.joined';
         this.game = new Durak_1.Durak("WasApBi");
+        this.socket = io.connect(Config_1.Config.server);
+        this.registerOrLoginUser();
+        if (this.user != null) {
+            this.joinTheGame();
+        }
+        // Wrap the socket requests
+        let wrap = function (fn) {
+            return function () {
+                fn.apply(self, arguments);
+            };
+        };
+        // Register socket callbacks
+        this.socket.on(this.SOCKET_USER_JOINED, wrap(this.userJoined));
+        this.socket.on(this.SOCKET_MOVE_RECEIVED, wrap(this.moveReceived));
     }
-    GameController.prototype.onLoadView = function (window, doc) {
-        _super.prototype.onLoadView.call(this, window, doc);
-    };
-    GameController.prototype.onClickTakeCard = function () {
-        _super.prototype.setIsDefending.call(this);
-    };
-    GameController.prototype.onClickEndMove = function () {
-        _super.prototype.setIsAttacking.call(this);
-    };
-    GameController.prototype.attack = function (card) {
+    moveReceived(data) {
+        console.log("MoveReceived");
+        console.log(data);
+    }
+    userJoined(data) {
+        console.log("userJoines");
+        console.log(data);
+    }
+    registerOrLoginUser() {
+        this.user = electron_1.remote.getGlobal('sharedObject').user;
+        if (this.user == null) {
+            this.socket.emit('user.new', function (callback) {
+                let user = {
+                    'username': callback.username
+                };
+                electron_1.remote.getGlobal('sharedObject').user = user;
+                this.user = user;
+            });
+        }
+    }
+    joinTheGame() {
+        this.socket.emit('game.join', this.user.username, function (cb) {
+        });
+    }
+    onLoadView(window, doc) {
+        super.onLoadView(window, doc);
+    }
+    onClickTakeCard() {
+        super.setIsDefending();
+    }
+    onClickEndMove() {
+        super.setIsAttacking();
+    }
+    attack(card) {
+        console.log("Attack");
         console.log(card);
-    };
-    GameController.prototype.defend = function (toDefend, defendWith) {
-    };
-    return GameController;
-}(ViewController_1.ViewController));
+        this.socket.emit(this.SOCKET_MAKE_MOVE, {
+            matches: [
+                {
+                    attackCard: {
+                        symbol: 1,
+                        value: 14,
+                        by: "Vitali7"
+                    },
+                    defendCard: {
+                        symbol: 2,
+                        value: 14,
+                        by: "Wowa"
+                    }
+                },
+                {
+                    attackCard: {
+                        symbol: 1,
+                        value: 14,
+                        by: "Vitali"
+                    },
+                    defendCard: null
+                }
+            ]
+        });
+    }
+    defend(toDefend, defendWith) {
+        console.log("Defend");
+        console.log("ToDefend:");
+        console.log(toDefend);
+        console.log("DefendWidth:");
+        console.log(defendWith);
+    }
+}
 exports.GameController = GameController;
