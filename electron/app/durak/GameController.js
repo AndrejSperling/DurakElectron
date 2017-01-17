@@ -27,6 +27,7 @@ class GameController extends ViewController_1.ViewController {
         this.socket.on(this.SOCKET_MOVE_RECEIVED, wrap(this.moveReceived));
     }
     moveReceived(data) {
+        console.log(this.user);
         console.log("MoveReceived");
         console.log(data);
     }
@@ -62,8 +63,17 @@ class GameController extends ViewController_1.ViewController {
     attack(card) {
         console.log("Attack");
         console.log(card);
+        let self = this;
         this.socket.emit(this.SOCKET_MAKE_MOVE, {
             matches: [
+                {
+                    attackCard: {
+                        symbol: card.suit,
+                        value: card.value,
+                        by: "" + self.user.username
+                    },
+                    defendCard: null
+                },
                 {
                     attackCard: {
                         symbol: 1,
@@ -75,14 +85,6 @@ class GameController extends ViewController_1.ViewController {
                         value: 14,
                         by: "Wowa"
                     }
-                },
-                {
-                    attackCard: {
-                        symbol: 1,
-                        value: 14,
-                        by: "Vitali"
-                    },
-                    defendCard: null
                 }
             ]
         });

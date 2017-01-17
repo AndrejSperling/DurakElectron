@@ -25,6 +25,7 @@
     "jquery": "*",
     "jquery-ui": "*",
     "remote": "^0.2.6",
+    "socket.io-client": "^1.7.2",
     "typescript": "^2.1.4"
   },
   "devDependencies": {
