@@ -16,7 +16,7 @@
 
     <script>
         var GameController = require("../app/durak/GameController").GameController;
-        var controller = new GameController();
+        var controller = new GameController(document);
     </script>
 
 </head>
@@ -121,15 +121,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-3 ">
-                                    <div class="match matchable"
-                                         style="height: 140px; width: 120px; position: relative;float:left;">
-                                        <div class="defence card symbol-1 value-6"
-                                             style="position: absolute; left: 0px; top: 0px;"></div>
-                                        <div class="attack card symbol-1 value-7"
-                                             style="position: absolute; right: 0px; bottom: 0px;"></div>
-                                    </div>
-                                </div>
+
                             </div>
 
                         </div>
@@ -137,37 +129,51 @@
                     </div>
                 </td>
             </tr>
-            <tr>
+            <!--<tr>
                 <td style="height: 30px;">
                     <div style="text-align: center; height: 30px;">
-                        <!--<input type="button" id="takeCard" value="Karten nehmen"/>
-                        <input type="button" id="endMove" value="Zug beenden"/>-->
+                        <input type="button" id="asdf" value="Karten nehmen"/>
+                        <input type="button" id="fdsa" value="Zug beenden"/>
                     </div>
                 </td>
-            </tr>
+            </tr>-->
             <tr>
                 <td id="playersHand">
-                    <div class="col-md-3"></div>
+                    <div class="col-md-3">
+
+                        <div id="jointheroom" style="height: 148px; overflow: auto">
+
+                        </div>
+
+                    </div>
                     <div class="col-md-6">
 
                         <div class="player_container">
 
                             <div class="player">
                                 <div class="avatar"></div>
-                                <div class="name">Vitali123</div>
+                                <div class="name" id="myName">--</div>
                             </div>
 
                             <div class="player_cards">
 
-                                <div id="yes-drop" class="card symbol-1 value-6 playable" style="left: 109px;"
+                                <div class="card symbol-1 value-6 playable" style="left: 50px;"
                                      data-card-value="6"
                                      data-card-symbol="1"></div>
-                                <div class="card symbol-2 value-7 playable" style="left: 218px;" data-card-value="7"
+                                <div class="card symbol-2 value-7 playable" style="left: 100px;" data-card-value="7"
                                      data-card-symbol="2"></div>
-                                <div class="card symbol-3 value-8 playable" style="left: 327px;" data-card-value="8"
+                                <div class="card symbol-3 value-8 playable" style="left: 150px;" data-card-value="8"
                                      data-card-symbol="3"></div>
-                                <div class="card symbol-4 value-9 playable" style="left: 436px;" data-card-value="9"
-                                     data-card-symbol="4"></div>
+                                <div class="card symbol-3 value-14 playable" style="left: 200px;" data-card-value="14"
+                                     data-card-symbol="3"></div>
+
+
+                                <div class="card symbol-2 value-13 playable" style="left: 250px;" data-card-value="13"
+                                     data-card-symbol="2"></div>
+
+
+                                <div class="card symbol-1 value-12 playable" style="left: 300px;" data-card-value="12"
+                                     data-card-symbol="1"></div>
 
                             </div>
 
@@ -175,6 +181,15 @@
 
                     </div>
                     <div class="col-md-3"></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="height: 30px;">
+                    <div style="text-align: center; height: 30px;">
+                        <input type="button" id="takeCard" value="Verteidigen"/>
+                        <input type="button" id="endMove" value="Angreifen"/>
+                    </div>
                 </td>
             </tr>
 
@@ -186,10 +201,7 @@
 </div>
 
 
-<div style="text-align: center; height: 30px;">
-    <input type="button" id="takeCard" value="Verteidigen"/>
-    <input type="button" id="endMove" value="Angreifen"/>
-</div>
+
 
 </body>
 

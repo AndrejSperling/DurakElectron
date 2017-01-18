@@ -20,9 +20,14 @@ class ViewController {
         this._cardsOnDeck = 0;
         this.isAttacking = false;
         this.isAttached = false;
+        $(document).ready(() => {
+            this.doc = document;
+            this.viewReady();
+        });
         ViewController.self = this;
     }
     onLoadView(window, doc) {
+        this.doc = doc;
         doc.getElementById(this.BUTTON_END_MOVE).onclick = () => {
             this.onClickEndMove();
         };
@@ -217,6 +222,12 @@ class ViewController {
         console.log(this);
         //ViewController.renderDeckOfCards();
         //ViewController.renderOwnDeck();
+    }
+    setName(name) {
+        $("#myName").html(name);
+    }
+    log(title, msg) {
+        $("#jointheroom").prepend("<div><b>" + title + "</b> " + msg + "</div>");
     }
 }
 exports.ViewController = ViewController;

@@ -7,9 +7,9 @@ import {Card} from "./Card";
 
 export class GameController extends ViewController {
 
-    protected readonly SOCKET_MAKE_MOVE         = 'game.move.make';
-    protected readonly SOCKET_MOVE_RECEIVED     = 'game.move.received';
-    protected readonly SOCKET_USER_JOINED       = 'user.joined';
+    protected readonly SOCKET_MAKE_MOVE = 'game.move.make';
+    protected readonly SOCKET_MOVE_RECEIVED = 'game.move.received';
+    protected readonly SOCKET_USER_JOINED = 'user.joined';
 
     private socket;
     private game;
@@ -18,6 +18,7 @@ export class GameController extends ViewController {
     constructor() {
 
         super();
+
         this.game = new Durak("WasApBi");
         this.socket = io.connect(Config.server);
 
@@ -40,15 +41,27 @@ export class GameController extends ViewController {
 
     }
 
-    private moveReceived(data){
+    private moveReceived(data) {
         console.log(this.user);
         console.log("MoveReceived");
         console.log(data);
+        let attack = data.matches[0].attackCard;
+        let defend = data.matches[0].defendCard;
+        let move;
+        if(attack == null){
+            move = "By " + defend.by + " Card: s:" + defend.symbol + " v:" + defend.value;
+            super.log("Defend", move);
+        }else{
+            move = "By " + attack.by + " Card: s:" + attack.symbol + " v:" + attack.value;
+            super.log("Attack", move);
+        }
+
     }
 
     private userJoined(data) {
         console.log("userJoines");
-        console.log(data)
+        console.log(data);
+        super.log("User Joined", "" + data.user.username);
     }
 
     private registerOrLoginUser() {
@@ -62,6 +75,12 @@ export class GameController extends ViewController {
                 this.user = user;
             });
         }
+        if (this.user == null || this.user == undefined) {
+            this.user = {
+                username: "NoName"
+            };
+        }
+        super.setName(this.user.username + "")
     }
 
     private joinTheGame() {
@@ -88,15 +107,15 @@ export class GameController extends ViewController {
         console.log("Attack");
         console.log(card);
 
-        let self = this;
+        let username = this.user.username;
 
         this.socket.emit(this.SOCKET_MAKE_MOVE, {
-            matches :[
+            matches: [
                 {
                     attackCard: {
                         symbol: card.suit,
                         value: card.value,
-                        by: "" + self.user.username
+                        by: "" + username
                     },
                     defendCard: null
                 },
@@ -123,8 +142,23 @@ export class GameController extends ViewController {
         console.log(toDefend);
         console.log("DefendWidth:");
         console.log(defendWith);
+
+        let username = this.user.username;
+        this.socket.emit(this.SOCKET_MAKE_MOVE, {
+            matches: [{
+                attackCard: null,
+                defendCard: {
+                    symbol: defendWith.suit,
+                    value: defendWith.value,
+                    by: username
+                }
+            }]
+        });
     }
 
+    viewReady() {
+        super.setName(this.user.username || "NoName")
+    }
 }
 
 

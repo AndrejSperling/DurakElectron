@@ -1,7 +1,7 @@
 var users = {};
 var usersInGame = {};
 var counter = 1337;
-var names = ['Vitali', 'Wladimir', 'Mascha', 'Ivan', 'Anja', 'Tanja'];
+var names = ['Vitali', 'Wladimir', 'Mascha', 'Ivan', 'Olga', 'Tanja'];
 
 function random(low, high) {
     return (Math.random() * (high - low) + low).toFixed(0);
@@ -40,9 +40,11 @@ module.exports = function (io) {
 
 		// Nutzer beim Spiel anmelden
         socket.on('game.join', function (username, cb) {
-
-            socket.emit('user.joined', {
-                'user': socket.user
+            console.log("Game.Join: " + username);
+            socket.broadcast.emit('user.joined', {
+                'user': {
+                    username : username
+                }
             });
 
         });
@@ -56,7 +58,8 @@ module.exports = function (io) {
 
 		// Nutzer macht einen Schritt
         socket.on('game.move.make', function (data, cb) {
-            socket.emit('game.move.received', data);
+            console.log("Game.Move.Make");
+            io.sockets.emit('game.move.received', data);
         });
 
 		// Meldet Nutzer ab, wenn er das Programm velässt

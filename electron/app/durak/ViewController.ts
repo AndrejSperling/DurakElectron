@@ -7,6 +7,8 @@ import {Suit} from "./Suit";
 export abstract class ViewController {
 
     private static self;
+    private doc;
+
     protected readonly DATA_SYMBOL = "data-card-symbol";
     protected readonly DATA_VALUE = "data-card-value";
     protected readonly PLAYABLE_CARDS = "playable";
@@ -38,10 +40,18 @@ export abstract class ViewController {
     protected isAttached = false;
 
     constructor() {
+
+        $(document).ready(() => {
+           this.doc = document;
+           this.viewReady();
+        });
+
         ViewController.self = this;
     }
 
     onLoadView(window: Window, doc: HTMLDocument): void {
+
+        this.doc = doc;
 
         doc.getElementById(this.BUTTON_END_MOVE).onclick = () => {
             this.onClickEndMove()
@@ -297,6 +307,14 @@ export abstract class ViewController {
         //ViewController.renderOwnDeck();
     }
 
+    setName(name: string){
+        $("#myName").html(name)
+    }
+
+    log(title:string, msg:string){
+        $("#jointheroom").prepend("<div><b>" + title + "</b> " + msg+"</div>");
+    }
+
     abstract onClickTakeCard()
 
     abstract onClickEndMove()
@@ -304,5 +322,7 @@ export abstract class ViewController {
     abstract attack(card: Card)
 
     abstract defend(attack: Card, defend: Card)
+
+    abstract viewReady()
 
 }

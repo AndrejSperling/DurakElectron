@@ -30,10 +30,22 @@ class GameController extends ViewController_1.ViewController {
         console.log(this.user);
         console.log("MoveReceived");
         console.log(data);
+        let attack = data.matches[0].attackCard;
+        let defend = data.matches[0].defendCard;
+        let move;
+        if (attack == null) {
+            move = "By " + defend.by + " Card: s:" + defend.symbol + " v:" + defend.value;
+            super.log("Defend", move);
+        }
+        else {
+            move = "By " + attack.by + " Card: s:" + attack.symbol + " v:" + attack.value;
+            super.log("Attack", move);
+        }
     }
     userJoined(data) {
         console.log("userJoines");
         console.log(data);
+        super.log("User Joined", "" + data.user.username);
     }
     registerOrLoginUser() {
         this.user = electron_1.remote.getGlobal('sharedObject').user;
@@ -46,6 +58,12 @@ class GameController extends ViewController_1.ViewController {
                 this.user = user;
             });
         }
+        if (this.user == null || this.user == undefined) {
+            this.user = {
+                username: "NoName"
+            };
+        }
+        super.setName(this.user.username + "");
     }
     joinTheGame() {
         this.socket.emit('game.join', this.user.username, function (cb) {
@@ -63,14 +81,14 @@ class GameController extends ViewController_1.ViewController {
     attack(card) {
         console.log("Attack");
         console.log(card);
-        let self = this;
+        let username = this.user.username;
         this.socket.emit(this.SOCKET_MAKE_MOVE, {
             matches: [
                 {
                     attackCard: {
                         symbol: card.suit,
                         value: card.value,
-                        by: "" + self.user.username
+                        by: "" + username
                     },
                     defendCard: null
                 },
@@ -95,6 +113,20 @@ class GameController extends ViewController_1.ViewController {
         console.log(toDefend);
         console.log("DefendWidth:");
         console.log(defendWith);
+        let username = this.user.username;
+        this.socket.emit(this.SOCKET_MAKE_MOVE, {
+            matches: [{
+                    attackCard: null,
+                    defendCard: {
+                        symbol: defendWith.suit,
+                        value: defendWith.value,
+                        by: username
+                    }
+                }]
+        });
+    }
+    viewReady() {
+        super.setName(this.user.username || "NoName");
     }
 }
 exports.GameController = GameController;
